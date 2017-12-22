@@ -13,6 +13,7 @@ public class Step implements Cloneable
 
 
     static Set<Set<Integer>> untickedTerms = new HashSet<>();
+    static HashMap< Set<Integer>, List<Integer> > primeImplicantHashMap = new HashMap<>();
 
     Boolean IsStepEmpty()
     {
@@ -53,6 +54,7 @@ public class Step implements Cloneable
     {
         //Initializing the set
         untickedTerms.clear();
+        primeImplicantHashMap.clear();
 
 
         maxBits = 1;
@@ -97,7 +99,12 @@ public class Step implements Cloneable
         //adding all terms of previous step to untickedTerms
         for(int i = 0; i < this.group.length ; i++)
             for(int j = 0; j< this.group[i].size(); j++ )
+            {
                 untickedTerms.add( this.group[i].get(j).minterms);
+                primeImplicantHashMap.put(this.group[i].get(j).minterms,
+                        this.group[i].get(j).binaryRepresentation);
+            }
+
 
 
 
@@ -136,9 +143,17 @@ public class Step implements Cloneable
 
                         // Removing a "ticked" term
                         if(untickedTerms.contains(this.group[i].get(j).minterms))
+                        {
                             untickedTerms.remove(this.group[i].get(j).minterms);
+                            primeImplicantHashMap.remove(this.group[i].get(j).minterms);
+                        }
+
                         if(untickedTerms.contains(this.group[i + 1].get(k).minterms))
+                        {
                             untickedTerms.remove(this.group[i + 1].get(k).minterms);
+                            primeImplicantHashMap.remove(this.group[i + 1].get(k).minterms);
+                        }
+
 
 
                         Set<Integer> newMinterms = new HashSet<>();
@@ -205,6 +220,7 @@ public class Step implements Cloneable
         for(int i=0;i<group.length; i++)
         {
             for(GroupSubEntries gs : group[i])
+
             {
                 /*
                 System.out.println(i
