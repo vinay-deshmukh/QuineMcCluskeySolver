@@ -5,8 +5,6 @@ import java.util.*;
 public class Driver {
     public static void main(String args[]) {
 
-
-        //start
         System.out.println("Enter minterms");
         Scanner sc = new Scanner(System.in);
 
@@ -15,9 +13,9 @@ public class Driver {
 
         String line = sc.nextLine();
         String numStr [] = line.split(" ");
-        //int numbers[] = new int[numStr.length];
-        int i = 0;
-        //System.out.println(numbers);
+
+        int i=0;
+
         for(String s : numStr) {
             try {
                 numsList.add(Integer.parseInt(s));
@@ -30,10 +28,13 @@ public class Driver {
         System.out.println("Enter don't care terms:");
         line = sc.nextLine();
         numStr = line.split(" ");
-        //int numbers[] = new int[numStr.length];
         i = 0;
-        //System.out.println(numbers);
         for(String s : numStr) {
+
+            //for no terms
+            if(numStr.length == 1)
+                break;
+
             try {
                 numsList.add(Integer.parseInt(s));
                 dontCare.add(Integer.parseInt(s));
@@ -51,56 +52,6 @@ public class Driver {
         }
 
 
-        /*
-        //ORIGINAL
-        String line = sc.nextLine();
-        String numStr [] = line.split(" ");
-        int numbers[] = new int[numStr.length];
-        int i = 0;
-        System.out.println(numbers);
-        for(String s : numStr){
-            try
-            {
-                numbers[i] = Integer.parseInt(s);
-                i++;
-            }
-            catch(Exception e)
-            {
-                System.out.println(s + " is invalid");
-            }
-        */
-
-
-
-        /*
-        //Testing block
-        // Create a Step Object
-        Step step = new Step(numbers);
-        System.out.println("Step 0");
-        step.display();
-
-        System.out.println("\nStep 1\n");
-        Step step1 = step.createNextStep();
-
-        System.out.println("\n\n   DISPLAYING STEP 0");
-        step.display();
-
-        System.out.println("\n\n   DISPLAYING STEP 1");
-        step1.display();
-
-        Step step2 = step1.createNextStep();
-        System.out.println("\n\n   DISPLAYING STEP 2");
-        step2.display();
-
-        Step step3 = step2.createNextStep();
-        System.out.println("\n\n   DISPLAYING STEP 3");
-        step3.display();
-
-        System.out.println("\n\n Unticked terms");
-        System.out.println(Step.untickedTerms);
-        */
-
-        //AUTO METHOD
         //Initiliazing no of X as zero for all numbers
         for(int j=0;j<numbers.length;j++)
         {
@@ -116,23 +67,23 @@ public class Driver {
             stepN0.display();
             stepN1 = stepN0.createNextStep();
             stepN0 = stepN1;
+            stepNumber++;
         }while(!stepN1.IsStepEmpty());
         System.out.println("\n\nUnticked terms");
-        //System.out.println(Step.untickedTerms);
-        for( Set s: Step.untickedTerms)
+        for( Set<Integer> s : Step.untickedTerms)
         {
-            System.out.println(GroupSubEntries.correctString(s));
+            System.out.format("%16s %20s\n",
+                    GroupSubEntries.correctString(s)
+                    ,PrimeImplicantTable.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
         }
 
-
-
+        //Displaying the entire PI Table
         Driver.displayPITable(numbers,dontCare);
 
         Set<Integer> essentialMinterm = new HashSet<>();
         System.out.println("\n\nNumbers with only 1 X");
         for(Integer key : PrimeImplicantTable.noOfXHashMap.keySet())
         {
-            //System.out.println(key+" = "+PrimeImplicantTable.noOfXHashMap.get(key));
             if(PrimeImplicantTable.noOfXHashMap.get(key) == 1)
             {
                 System.out.println(key);
@@ -144,7 +95,7 @@ public class Driver {
         Set<Set<Integer>> essentialPrimeImplicant = new HashSet<>();
         for(Set<Integer> u : Step.untickedTerms)
         {
-            //if u and essentialMinterm have common
+            //if u and essentialMinterm have common elements
             // then u is ess PI
             Set<Integer> hold = new HashSet<>(u);
             hold.retainAll(essentialMinterm);
@@ -196,9 +147,6 @@ public class Driver {
         {
             PrimeImplicantTable.CreateSingleRowInPITable(s, numbers,dontCare);
         }
-
-
-
 
     }
 
