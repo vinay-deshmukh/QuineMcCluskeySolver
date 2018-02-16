@@ -18,6 +18,7 @@ public class Driver {
 
         for(String s : numStr) {
             try {
+                // Adding the input numbers to a list containing the numbers
                 numsList.add(Integer.parseInt(s));
                 i++;
             } catch (Exception e) {
@@ -36,6 +37,8 @@ public class Driver {
                 break;
 
             try {
+                // Adding the dont care numbers to the list containing the numbers
+                // and also in the list that hols dont care numbers
                 numsList.add(Integer.parseInt(s));
                 dontCare.add(Integer.parseInt(s));
                 i++;
@@ -55,6 +58,9 @@ public class Driver {
         //Initiliazing no of X as zero for all numbers
         for(int j=0;j<numbers.length;j++)
         {
+            // For each number, assign the value of number of X's as zero
+            // This value is assigned such that the key to refer to the value is
+            // the number itself, ie the number whose x are needed.
             PrimeImplicantTable.noOfXHashMap.put(new Integer(numbers[j]), new Integer(0));
         }
 
