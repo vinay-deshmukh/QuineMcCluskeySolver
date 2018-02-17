@@ -32,11 +32,4 @@ public class DriverTest1 {
 
     }
 
-    @Test
-    public void main() {
-    }
-
-    @Test
-    public void displayPITable() {
-    }
 }
