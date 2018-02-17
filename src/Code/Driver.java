@@ -9,6 +9,7 @@ public class Driver {
 
         doQuineMcCluskey("0 1 2 4","");
 
+        //region Original Main
         /*
         System.out.println("Enter minterms");
         Scanner sc = new Scanner(System.in);
@@ -125,6 +126,7 @@ public class Driver {
         }
 
     */
+        //endregion
 
     }
 
