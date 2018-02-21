@@ -7,8 +7,8 @@ public class Driver {
 
         //doQuineMcCluskey("4 8 10 11 12 15","9 14");
 
-        doQuineMcCluskey("0 1 2 4","");
-
+        Set res1 = (Set)doQuineMcCluskey("4 8 10 11 12 15","9 14");
+        System.out.println(res1);
         //region Original Main
         /*
         System.out.println("Enter minterms");
@@ -277,7 +277,7 @@ public class Driver {
                     ,PrimeImplicantTable.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
         }
 
-        return null;
+        return essentialPrimeImplicant;
     }
 
 }
