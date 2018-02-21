@@ -30,7 +30,7 @@ public class DriverTest1 {
     @After
     public void restoreStreams() throws Exception {
         System.setOut(stdout);
-        System.out.println("test");
+        //System.out.println("test");
     }
 
     // Keeping it as test to run easily,
@@ -54,7 +54,7 @@ public class DriverTest1 {
         }
 
         String [] outputsWithSets = inputOutput[1].split(";");
-        stdout.println(Arrays.toString(outputsWithSets));
+        //stdout.println(Arrays.toString(outputsWithSets));
         Set outputSet = new HashSet();
 
         for(int i=0; i<outputsWithSets.length; i++){
@@ -73,12 +73,12 @@ public class DriverTest1 {
             outputSet.add(ints);
         }
         //stdout.println(Arrays.toString(outputsWithSets));
-        stdout.println(outputSet);
+        //stdout.println(outputSet);
 
         // return
         // inputMinterms, inputDonts & outputSet
-        stdout.println("!"+inputMinterms+"!");
-        stdout.println("!"+inputDonts+"!");
+        //stdout.println("!"+inputMinterms+"!");
+        //stdout.println("!"+inputDonts+"!");
 
         return new Object[]{inputMinterms, inputDonts, outputSet};
         //return new ArrayList<Object>(inputMinterms, inputDonts, outputSet);
@@ -107,20 +107,12 @@ public class DriverTest1 {
         0 1 2 8 10 11 14 15 = 0,1 ; 0,2,8,10 ; 10,11,14,15
          */
 
-        Set result = (Set)doQuineMcCluskey("0 1 3 7 8 9 11 15","");
-        Set<Set> expected = new HashSet<>();
+        Object[] obs = getInputs("0 1 3 7 8 9 11 15 = 0,1,8,9 ; 3,7,11,15");
+        String inputMinterms = (String)obs[0];
+        String inputDonts = (String)obs[1];
+        Set expected = (Set)obs[2];
 
-        Set<Integer> a = new HashSet<>();
-        a.add(0); a.add(1); a.add(8); a.add(9);
-
-        expected.add(a);
-        a = new HashSet<>();
-        a.add(3); a.add(7); a.add(11); a.add(15);
-        expected.add(a);
-        stdout.println("Result: "+ result);
-        stdout.println("Expected: "+ expected);
-
-        assertEquals(expected, result);
+        assertEquals(expected, doQuineMcCluskey(inputMinterms, inputDonts));
 
     }
 
