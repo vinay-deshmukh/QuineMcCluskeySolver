@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +33,57 @@ public class DriverTest1 {
         System.out.println("test");
     }
 
+    // Keeping it as test to run easily,
+    // Give return type later on to use it to create inputs
+    // Also param
+
+    public Object[] getInputs(String s1) throws Exception{
+        //String s1 = "0 1 2 3 5 7 8 9 11 14 = 14 ; 0,1,2,3 ; 0,1,8,9 ; 1,3,5,7 ; 1,3,9,11";
+        //String s2 = "1 5 6 12 13 14 + 2 4 = 1,5 ; 4,5,12,13 ; 4,6,12,14";
+
+        //s1 = s2;
+        String[] inputOutput =s1.split("=");
+
+        String [] inputsWithDont =  inputOutput[0].split("[+]");
+        String inputs = inputsWithDont[0].trim();
+        String inputMinterms = inputs;
+        
+        String inputDonts = "";
+        if (inputsWithDont.length >1) {
+            inputDonts = inputsWithDont[1].trim();
+        }
+
+        String [] outputsWithSets = inputOutput[1].split(";");
+        stdout.println(Arrays.toString(outputsWithSets));
+        Set outputSet = new HashSet();
+
+        for(int i=0; i<outputsWithSets.length; i++){
+            // Removing spaces from around the element
+            outputsWithSets[i] = outputsWithSets[i].trim();
+
+            // this has 1,2,4,5
+            String singInputs [] = outputsWithSets[i].split(",");
+            Set<Integer> ints = new HashSet<>();
+            // set of ints
+            for(String oneNum : singInputs){
+                ints.add(Integer.parseInt(oneNum));
+            }
+
+            // adding [1,2,3] to result set
+            outputSet.add(ints);
+        }
+        //stdout.println(Arrays.toString(outputsWithSets));
+        stdout.println(outputSet);
+
+        // return
+        // inputMinterms, inputDonts & outputSet
+        stdout.println("!"+inputMinterms+"!");
+        stdout.println("!"+inputDonts+"!");
+
+        return new Object[]{inputMinterms, inputDonts, outputSet};
+        //return new ArrayList<Object>(inputMinterms, inputDonts, outputSet);
+    }
+
     @Test
     public void output_3()throws Exception{
         System.out.print("3");
@@ -42,7 +94,7 @@ public class DriverTest1 {
     @Test
     public void outputs() throws Exception{
         /*
-        0 1 3 7 8 9 11 15 =  0,1,8,9 ; 3,7,11,15
+        0 1 3 7 8 9 11 15 = 0,1,8,9 ; 3,7,11,15
         0 1 2 3 5 7 8 9 11 14 = 14 ; 0,1,2,3 ; 0,1,8,9 ; 1,3,5,7 ; 1,3,9,11
         1 5 6 12 13 14 + 2 4 = 1,5 ; 4,5,12,13 ; 4,6,12,14
         0 1 3 4 5 6 11 13 14 15 = 3,11 ; 6,14 ; 13,15 ; 0,1,4,5
