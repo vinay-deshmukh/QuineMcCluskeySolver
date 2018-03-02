@@ -6,8 +6,7 @@ public class Step implements Cloneable
 {
     public static final int NONE = -99;
     public static final int DASH = -99;
-    Group group[];
-    //ArrayList<GroupSubEntries> group[];
+    ArrayList<GroupSubEntries> [] group;
 
     int maxBits=1;
 
@@ -42,14 +41,19 @@ public class Step implements Cloneable
         return binary;
     }
 
+    @SuppressWarnings("unchecked")
+    // Used for the line:
+    // group = (ArrayList<GroupSubEntries>[]) new ArrayList[noOfGroups];
     Step(int noOfGroups)
     {
-
-        group = new Group[noOfGroups];
+        group = (ArrayList<GroupSubEntries>[]) new ArrayList[noOfGroups];
         for(int i =0; i<noOfGroups; i++)
-            group[i] = new Group();
+            group[i] = new ArrayList<>();
     }
 
+    @SuppressWarnings("unchecked")
+    // Used for the line:
+    // group = (ArrayList<GroupSubEntries>[]) new ArrayList[maxBits + 1];
     Step(int [] nums)
     {
         //Initializing the set
@@ -75,9 +79,9 @@ public class Step implements Cloneable
             listBinNum.add(currentNumBin);
         }
 
-        group = new Group[maxBits + 1];
+        group = (ArrayList<GroupSubEntries>[]) new ArrayList[maxBits + 1];
         for(int i =0; i<group.length; i++)
-            group[i] = new Group();
+            group[i] = new ArrayList<>();
 
         for(int i=0;i<nums.length;i++)
         {
