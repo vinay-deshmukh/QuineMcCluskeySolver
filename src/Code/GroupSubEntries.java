@@ -11,48 +11,23 @@ public class GroupSubEntries {
     {
         alphabets.clear();
         char c ='A';
+
+        // for loop determines how many alphabets to be used as column headers for binary representation
+        // ie A B C D for 4 bit numbers
+        //    A B C D E for 5 bit numbers
         for( int i =0;i<maxBits;i++,c++ )
         {
             alphabets.add( String.valueOf(c) );
         }
     }
 
-    GroupSubEntries(){}
     GroupSubEntries(List binaryRepresentation, Set minterms)
     {
         this.binaryRepresentation = binaryRepresentation;
         this.minterms = minterms;
     }
 
-    GroupSubEntries(GroupSubEntries gs)
-    {
-        this.minterms = gs.minterms;
-        this.binaryRepresentation = gs.binaryRepresentation;
-    }
 
-    void displayGroupSubEntries()
-    {
-        System.out.println(binaryRepresentation + "; " + minterms);
-    }
-
-    /*
-    //original method
-
-    static String correctString(List <Integer> l1)
-    {
-        String result = "";
-        for(int i = 0;i<l1.size(); i++, result+= " " )
-        {
-            if(l1.get(i) == Step.DASH)
-                result+="-";
-            else
-                result+= Integer.toString(l1.get(i));
-        }
-        result = result.substring(0, result.length() - 1);
-        //return "[" + result + "]";
-        return  result;
-    }
-    */
 
     static String correctString(List l1)
     {
@@ -73,7 +48,6 @@ public class GroupSubEntries {
 
         }
         result = result.substring(0, result.length() - 1);
-        //return "[" + result + "]";
         return  result;
     }
 
@@ -85,7 +59,7 @@ public class GroupSubEntries {
             result+= Integer.toString(i) + ", ";
         }
         result = result.substring(0, result.length() - 2);
-        //return "[" + result + "]";
+
         return  result;
     }
 

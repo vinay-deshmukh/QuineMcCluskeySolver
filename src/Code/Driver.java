@@ -206,6 +206,9 @@ public class Driver {
         }
 
         //Converting the list to array
+        // Can't use inbuilt function since that would give a
+        // Integer[], and not int[]
+        // And int[] has been used in a lot of places, which is inconvenient to rewrite
         int numbers[] = new int[numsList.size()];
         for(int j = 0; j< numsList.size(); j++)
         {
@@ -223,6 +226,7 @@ public class Driver {
         }
 
 
+        // Actual Working started
         Step stepN0 = new Step(numbers);
         Step stepN1;
         int stepNumber = 0;
@@ -233,6 +237,16 @@ public class Driver {
             stepN0 = stepN1;
             stepNumber++;
         }while(!stepN1.IsStepEmpty());
+        // We check for if step is empty since
+        // Step is generated from BinaryRepresentation where
+        // we have a pair of minterms like
+        // Pair 1 and Pair 2
+        // 0 1 0 0 or 0 1 - 0
+        // 0 1 1 0 or 0 0 - 0
+        // ie a one bit difference
+        // But when there exist no such pairs, then the step generated will be empty
+        // An empty step signifies end of the calculation process
+
         System.out.println("\n\nUnticked terms");
         for( Set<Integer> s : Step.untickedTerms)
         {
@@ -248,6 +262,7 @@ public class Driver {
         System.out.println("\n\nNumbers with only 1 X");
         for(Integer key : PrimeImplicantTable.noOfXHashMap.keySet())
         {
+            // Find minterm which has only 1 X
             if(PrimeImplicantTable.noOfXHashMap.get(key) == 1)
             {
                 System.out.println(key);
@@ -261,8 +276,22 @@ public class Driver {
         {
             //if u and essentialMinterm have common elements
             // then u is ess PI
+
+            // Create set hold to contain elements of set u
             Set<Integer> hold = new HashSet<>(u);
+
+            // boolean retainAll(Collection<?> c)
+            // Retains only the elements in this set that are contained in the specified collection
+            // (optional operation). In other words, removes from this set all of its elements that are not contained
+            // in the specified collection. If the specified collection is also a set, this operation effectively
+            // modifies this set so that its value is the intersection of the two sets.
+
+            // Seeing if set hold has any common terms with set essentialMinterm
+            // This function will modify set hold to contain the intersection of the two sets.
             hold.retainAll(essentialMinterm);
+
+            // If there are some common elements, set hold will not be empty.
+            // ie u is a essential Prime Implicannt, since hold is a clone of u.
             if(!hold.isEmpty())
             {
                 essentialPrimeImplicant.add(u);
