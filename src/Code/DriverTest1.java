@@ -119,6 +119,10 @@ public class DriverTest1 {
             // Adding single actual result to list
             resultList.add((Set)doQuineMcCluskey(inputMinterms, inputDonts));
 
+            // Comparing for human reader
+            stdout.printf("%70s = %-70s\n", expectedList.get(expectedList.size() -1 ),
+                                         resultList.get(resultList.size() - 1));
+
         }
 
         assertArrayEquals(expectedList.toArray(),resultList.toArray());
