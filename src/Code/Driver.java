@@ -135,7 +135,7 @@ public class Driver {
         System.out.println("\n\nPRIME IMPLICANT TABLE");
 
         //First Line
-        System.out.format("%16s %16s %20s\n",
+        System.out.format("%16s | %16s | %20s\n",
                 "Prime Implicants",
                 "Decimal minterms",
                 "Minterms Given");
@@ -150,7 +150,7 @@ public class Driver {
         }
 
         //Second Line
-        System.out.format("%16s %16s %20s\n",
+        System.out.format("%16s | %16s | %20s\n",
                 "",
                 "",
                 mintermsInARow);
@@ -301,7 +301,7 @@ public class Driver {
 
         for( Set<Integer> s : essentialPrimeImplicant)
         {
-            System.out.format("%16s %20s\n",
+            System.out.format("%16s | %20s\n",
                     GroupSubEntries.correctString(s)
                     ,PrimeImplicantTable.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
         }

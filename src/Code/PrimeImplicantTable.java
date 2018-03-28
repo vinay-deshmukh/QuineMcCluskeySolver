@@ -77,7 +77,7 @@ public class PrimeImplicantTable {
         }
 
 
-        System.out.format("%16s %16s %20s\n",
+        System.out.format("%16s | %16s | %20s\n",
                 PIalphabentForm,
                 decimalNumbers,
                 Xformat);

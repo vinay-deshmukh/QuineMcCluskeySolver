@@ -212,12 +212,12 @@ public class Step implements Cloneable
     void display()
     {
         //System.out.println("Group Minterms BinaryRepresentation");
-        System.out.format("%5s %15s %20s\n",
+        System.out.format("%5s | %15s | %20s\n",
                 "Group",
                 "Minterms",
                 "BinaryRepresentation");
 
-        System.out.format("%5s %15s %20s\n","","",
+        System.out.format("%5s | %15s | %20s\n","","",
         GroupSubEntries.correctString(GroupSubEntries.alphabets));
 
 
@@ -232,7 +232,7 @@ public class Step implements Cloneable
                         + GroupSubEntries.correctString(gs.binaryRepresentation));
                 */
 
-                System.out.format("%5s %15s %20s\n",
+                System.out.format("%5s | %15s | %20s\n",
                         i,
                         GroupSubEntries.correctString(gs.minterms),
                         GroupSubEntries.correctString(gs.binaryRepresentation));
