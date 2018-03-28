@@ -1,15 +1,17 @@
 package Table;
 
+import java.util.Arrays;
+
 public class BaseTable {
 
     private String header = null;
     // Title to be placed at the first row of the table
     // Initialized as null, since some tables don't need it
 
-    private String [] columnTitles;
+    private String [] columnTitles = null;
     // Column headings
 
-    private String [][] nRows;
+    private String [][] nRows = null;
     // The content which is printed as table, in 2D array form
     // The second dimension, is same length as the length of column titles
 
@@ -24,6 +26,42 @@ public class BaseTable {
         this.header = header;
         this.columnTitles = columnTitles;
         this.nRows = nRows;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder ans = new StringBuilder();
+        //TODO Change %15s, %10s to a calculated value
+        // ie find max length of characters for each column, add that up, and then center format
+        // the header
+
+        if(null != header)
+            ans.append(String.format("%10s\n", header));
+        if(null != columnTitles){
+            for(String s: columnTitles){
+                ans.append(String.format("%10s ", s));
+            }
+            ans.append("\n");
+        }
+        if(null != rowZero){
+            for(String s: rowZero){
+                ans.append(String.format("%10s ", s));
+            }
+            ans.append("\n");
+        }
+        if(null != nRows){
+            for(String a[]: nRows){
+
+                for(String s: a){
+                    ans.append(String.format("%10s ", s));
+                }
+                ans.append("\n");
+            }
+            ans.append("\n");
+        }
+
+
+        return ans.toString();
     }
 
     public String getHeader() {

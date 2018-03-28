@@ -214,12 +214,16 @@ public class Step implements Cloneable
     void display(List <StepTable> listStepTable)
     {
         StepTable stepTable = new StepTable();
+
+        //TODO Add steptable name as header
+        // ie Step 0, Step 1, etc
+
         //System.out.println("Group Minterms BinaryRepresentation");
         System.out.format("%5s | %15s | %20s\n",
                 "Group",
                 "Minterms",
                 "BinaryRepresentation");
-        // Header is already included in definition, so no need to set it here
+        // Column Titles is already included in definition, so no need to set it here
 
         System.out.format("%5s | %15s | %20s\n","","",
         GroupSubEntries.correctString(GroupSubEntries.alphabets));
@@ -228,27 +232,26 @@ public class Step implements Cloneable
         String [] a = {"", "", GroupSubEntries.correctString(GroupSubEntries.alphabets)};
         stepTable.setRowZero(a);
 
+        int noOfRows = 0;
+        for(int i=0;i<group.length;i++){
+            noOfRows += group[i].size();
+        }
 
-        String [][] arows = new String[group.length][3];
+        String [][] arows = new String[noOfRows][3];
+        int rowNo = 0;
         for(int i=0;i<group.length; i++)
         {
             for(GroupSubEntries gs : group[i])
-
             {
-                /*
-                System.out.println(i
-                        + GroupSubEntries.correctString(gs.minterms)
-                        + GroupSubEntries.correctString(gs.binaryRepresentation));
-                */
-
                 System.out.format("%5s | %15s | %20s\n",
                         i,
                         GroupSubEntries.correctString(gs.minterms),
                         GroupSubEntries.correctString(gs.binaryRepresentation));
 
-                arows[i][0] = String.valueOf(i);
-                arows[i][1] = GroupSubEntries.correctString(gs.minterms);
-                arows[i][2] = GroupSubEntries.correctString(gs.binaryRepresentation);
+                arows[rowNo][0] = String.valueOf(i);
+                arows[rowNo][1] = GroupSubEntries.correctString(gs.minterms);
+                arows[rowNo][2] = GroupSubEntries.correctString(gs.binaryRepresentation);
+                rowNo++;
             }
         }
 

@@ -24,6 +24,11 @@ public class Driver {
         System.out.println(res1);
 
         System.out.println("Steps in list:" + driver.listStepTables.size());
+
+        System.out.println("STEPS IN LIST:");
+        for(StepTable s: driver.listStepTables){
+            System.out.println(s);
+        }
         //region Original Main
         /*
         System.out.println("Enter minterms");
