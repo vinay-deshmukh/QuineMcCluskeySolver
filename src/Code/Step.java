@@ -1,5 +1,7 @@
 package Code;
 
+import Table.StepTable;
+
 import java.util.*;
 
 public class Step implements Cloneable
@@ -209,18 +211,25 @@ public class Step implements Cloneable
             return NONE;
     }
 
-    void display()
+    void display(List <StepTable> listStepTable)
     {
+        StepTable stepTable = new StepTable();
         //System.out.println("Group Minterms BinaryRepresentation");
         System.out.format("%5s | %15s | %20s\n",
                 "Group",
                 "Minterms",
                 "BinaryRepresentation");
+        // Header is already included in definition, so no need to set it here
 
         System.out.format("%5s | %15s | %20s\n","","",
         GroupSubEntries.correctString(GroupSubEntries.alphabets));
 
+        // Adding row Zero
+        String [] a = {"", "", GroupSubEntries.correctString(GroupSubEntries.alphabets)};
+        stepTable.setRowZero(a);
 
+
+        String [][] arows = new String[group.length][3];
         for(int i=0;i<group.length; i++)
         {
             for(GroupSubEntries gs : group[i])
@@ -237,8 +246,14 @@ public class Step implements Cloneable
                         GroupSubEntries.correctString(gs.minterms),
                         GroupSubEntries.correctString(gs.binaryRepresentation));
 
+                arows[i][0] = String.valueOf(i);
+                arows[i][1] = GroupSubEntries.correctString(gs.minterms);
+                arows[i][2] = GroupSubEntries.correctString(gs.binaryRepresentation);
             }
         }
+
+        stepTable.setnRows(arows);
+        listStepTable.add(stepTable);
 
     }
 }

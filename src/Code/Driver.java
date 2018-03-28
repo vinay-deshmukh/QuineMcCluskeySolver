@@ -1,14 +1,29 @@
 package Code;
 
+import Table.EssentialPrimeImplicantTable;
+import Table.PrimeImplicantTable;
+import Table.StepTable;
+import Table.UntickedTermsTable;
+
 import java.util.*;
 
 public class Driver {
+
+    List <StepTable>listStepTables = new ArrayList<>();
+    PrimeImplicantTable primeImplicantTable;
+    UntickedTermsTable untickedTermsTable;
+    EssentialPrimeImplicantTable essentialPrimeImplicantTable;
+
     public static void main(String args[]) {
 
         //doQuineMcCluskey("4 8 10 11 12 15","9 14");
 
-        Set res1 = (Set)doQuineMcCluskey("4 8 10 11 12 15","9 14");
+        Driver driver = new Driver();
+
+        Set res1 = (Set)driver.doQuineMcCluskey("4 8 10 11 12 15","9 14");
         System.out.println(res1);
+
+        System.out.println("Steps in list:" + driver.listStepTables.size());
         //region Original Main
         /*
         System.out.println("Enter minterms");
@@ -130,7 +145,7 @@ public class Driver {
 
     }
 
-    static  void displayPITable(int [] numbers, List<Integer> dontCare)
+    static void displayPITable(int [] numbers, List<Integer> dontCare)
     {
         System.out.println("\n\nPRIME IMPLICANT TABLE");
 
@@ -158,13 +173,13 @@ public class Driver {
         //Printing the data rows
         for(Set<Integer> s :Step.untickedTerms)
         {
-            PrimeImplicantTable.CreateSingleRowInPITable(s, numbers,dontCare);
+            PI_Table.CreateSingleRowInPITable(s, numbers,dontCare);
         }
 
     }
 
 
-    static Object doQuineMcCluskey(String nums, String donts){
+    Object doQuineMcCluskey(String nums, String donts){
 
         List<Integer> dontCare = new ArrayList<>();
         List<Integer> numsList = new ArrayList<>();
@@ -222,7 +237,7 @@ public class Driver {
             // For each number, assign the value of number of X's as zero
             // This value is assigned such that the key to refer to the value is
             // the number itself, ie the number whose x are needed.
-            PrimeImplicantTable.noOfXHashMap.put(new Integer(numbers[j]), new Integer(0));
+            PI_Table.noOfXHashMap.put(new Integer(numbers[j]), new Integer(0));
         }
 
 
@@ -232,7 +247,7 @@ public class Driver {
         int stepNumber = 0;
         do {
             System.out.println("\n\n   DISPLAYING STEP "+stepNumber);
-            stepN0.display();
+            stepN0.display(listStepTables);
             stepN1 = stepN0.createNextStep();
             stepN0 = stepN1;
             stepNumber++;
@@ -250,9 +265,9 @@ public class Driver {
         System.out.println("\n\nUnticked terms");
         for( Set<Integer> s : Step.untickedTerms)
         {
-            System.out.format("%16s %20s\n",
+            System.out.format("%16s | %20s\n",
                     GroupSubEntries.correctString(s)
-                    ,PrimeImplicantTable.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
+                    , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
         }
 
         //Displaying the entire PI Table
@@ -260,10 +275,10 @@ public class Driver {
 
         Set<Integer> essentialMinterm = new HashSet<>();
         System.out.println("\n\nNumbers with only 1 X");
-        for(Integer key : PrimeImplicantTable.noOfXHashMap.keySet())
+        for(Integer key : PI_Table.noOfXHashMap.keySet())
         {
             // Find minterm which has only 1 X
-            if(PrimeImplicantTable.noOfXHashMap.get(key) == 1)
+            if(PI_Table.noOfXHashMap.get(key) == 1)
             {
                 System.out.println(key);
                 essentialMinterm.add(key);
@@ -303,7 +318,7 @@ public class Driver {
         {
             System.out.format("%16s | %20s\n",
                     GroupSubEntries.correctString(s)
-                    ,PrimeImplicantTable.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
+                    , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
         }
 
         return essentialPrimeImplicant;

@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.*;
 
-import static Code.Driver.doQuineMcCluskey;
 import static org.junit.Assert.*;
 
 public class DriverTest1 {
@@ -107,6 +106,7 @@ public class DriverTest1 {
 
         List<Set> expectedList = new ArrayList<>();
         List<Set> resultList = new ArrayList<>();
+        Driver driver = new Driver();
         for(String oneInput: inputs){
             Object[] obs = getInputs(oneInput);
             String inputMinterms = (String)obs[0];
@@ -117,7 +117,7 @@ public class DriverTest1 {
             expectedList.add(expected);
 
             // Adding single actual result to list
-            resultList.add((Set)doQuineMcCluskey(inputMinterms, inputDonts));
+            resultList.add((Set)driver.doQuineMcCluskey(inputMinterms, inputDonts));
 
             // Comparing for human reader
             stdout.printf("%70s = %-70s\n", expectedList.get(expectedList.size() -1 ),

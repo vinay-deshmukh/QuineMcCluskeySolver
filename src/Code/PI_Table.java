@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class PrimeImplicantTable {
+public class PI_Table {
 
     static HashMap<Integer, Integer> noOfXHashMap = new HashMap<>();
 
@@ -64,11 +64,11 @@ public class PrimeImplicantTable {
             if(!dontCare.contains(numbers[i]))
             {
                 Xformat+=" ";
-                Integer prevNoOfX = PrimeImplicantTable.noOfXHashMap.get(numbers[i]);
+                Integer prevNoOfX = PI_Table.noOfXHashMap.get(numbers[i]);
                 if (s.contains(numbers[i]))
                 {
                     Xformat += "X";
-                    PrimeImplicantTable.noOfXHashMap.put(numbers[i], new Integer(prevNoOfX+1));
+                    PI_Table.noOfXHashMap.put(numbers[i], new Integer(prevNoOfX+1));
                 }
                 else
                     Xformat += " ";
