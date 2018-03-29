@@ -34,6 +34,8 @@ public class Driver {
         System.out.println(driver.untickedTermsTable);
 
         System.out.println(driver.primeImplicantTable);
+
+        System.out.println(driver.essentialPrimeImplicantTable);
         //region Original Main
         /*
         System.out.println("Enter minterms");
@@ -381,6 +383,10 @@ public class Driver {
         }
 
         System.out.println("\n\nThe Essential Prime Implicants are:");
+        essentialPrimeImplicantTable.setHeader("Essential Implicants");
+        essentialPrimeImplicantTable.setColumnTitles(new String [] {"Decimal Minterm", "Binary Representation"});
+        essentialPrimeImplicantTable.setRowZero(null);
+
         Set<Set<Integer>> essentialPrimeImplicant = new HashSet<>();
         for(Set<Integer> u : Step.untickedTerms)
         {
@@ -409,12 +415,20 @@ public class Driver {
 
         }
 
+        String [][] brows = new String[essentialPrimeImplicant.size()][2];
+        int ii=0;
         for( Set<Integer> s : essentialPrimeImplicant)
         {
             System.out.format("%16s | %20s\n",
                     GroupSubEntries.correctString(s)
                     , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
+
+            brows[ii][0] = GroupSubEntries.correctString(s);
+            brows[ii][1] = PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s));
+            ii++;
         }
+
+        essentialPrimeImplicantTable.setnRows(brows);
 
         return essentialPrimeImplicant;
     }
