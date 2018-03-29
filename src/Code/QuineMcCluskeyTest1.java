@@ -10,11 +10,11 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
-public class DriverTest1 {
+public class QuineMcCluskeyTest1 {
 
     private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private DriverTest1 terminalview;
+    private QuineMcCluskeyTest1 terminalview;
 
     // Stream redirection is done since doQuineMcCluskey spits out lots of
     // text which is irrelevant here
@@ -106,7 +106,7 @@ public class DriverTest1 {
 
         List<Set> expectedList = new ArrayList<>();
         List<Set> resultList = new ArrayList<>();
-        Driver driver = new Driver();
+        QuineMcCluskey qm = new QuineMcCluskey();
         for(String oneInput: inputs){
             Object[] obs = getInputs(oneInput);
             String inputMinterms = (String)obs[0];
@@ -117,7 +117,7 @@ public class DriverTest1 {
             expectedList.add(expected);
 
             // Adding single actual result to list
-            resultList.add((Set)driver.doQuineMcCluskey(inputMinterms, inputDonts));
+            resultList.add((Set) qm.doQuineMcCluskey(inputMinterms, inputDonts));
 
             // Comparing for human reader
             stdout.printf("%70s = %-70s\n", expectedList.get(expectedList.size() -1 ),

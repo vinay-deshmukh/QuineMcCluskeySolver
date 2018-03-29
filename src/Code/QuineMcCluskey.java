@@ -7,7 +7,7 @@ import Table.UntickedTermsTable;
 
 import java.util.*;
 
-public class Driver {
+public class QuineMcCluskey {
 
     List <StepTable>listStepTables = new ArrayList<>();
     PrimeImplicantTable primeImplicantTable = new PrimeImplicantTable();
@@ -18,24 +18,24 @@ public class Driver {
 
         //doQuineMcCluskey("4 8 10 11 12 15","9 14");
 
-        Driver driver = new Driver();
+        QuineMcCluskey qm = new QuineMcCluskey();
 
-        Set res1 = (Set)driver.doQuineMcCluskey("4 8 10 11 12 15","9 14");
+        Set res1 = (Set) qm.doQuineMcCluskey("4 8 10 11 12 15","9 14");
         System.out.println(res1);
 
-        System.out.println("Steps in list:" + driver.listStepTables.size());
+        System.out.println("Steps in list:" + qm.listStepTables.size());
 
         System.out.println("\nTO STRING OUTPUTS:\n");
         System.out.println("STEPS IN LIST:");
-        for(StepTable s: driver.listStepTables){
+        for(StepTable s: qm.listStepTables){
             System.out.println(s);
         }
 
-        System.out.println(driver.untickedTermsTable);
+        System.out.println(qm.untickedTermsTable);
 
-        System.out.println(driver.primeImplicantTable);
+        System.out.println(qm.primeImplicantTable);
 
-        System.out.println(driver.essentialPrimeImplicantTable);
+        System.out.println(qm.essentialPrimeImplicantTable);
         //region Original Main
         /*
         System.out.println("Enter minterms");
