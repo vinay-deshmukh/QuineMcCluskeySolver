@@ -1,7 +1,5 @@
 package Table;
 
-import java.util.Arrays;
-
 public class BaseTable {
 
     private String header = null;
@@ -31,35 +29,77 @@ public class BaseTable {
     @Override
     public String toString() {
         StringBuilder ans = new StringBuilder();
-        //TODO Change %15s, %10s to a calculated value
-        // ie find max length of characters for each column, add that up, and then center format
-        // the header
 
-        if(null != header)
-            ans.append(String.format("%10s\n", header));
+        int maxLenRow;      // Length of the longest row, will be found by using maxLenWord * noOfColumns
+        int maxLenWord = 0; // Length of the longest word
+
+        int noOfColumns = 1;
+        if(null != columnTitles)
+            noOfColumns = columnTitles.length;
+        else if(null != rowZero)
+            noOfColumns = rowZero.length;
+        else if(null != nRows)
+            noOfColumns = nRows[0].length;
+
+
+        if(null != nRows)
+            for(String [] a: nRows){
+                for(String as: a){
+                    if(maxLenWord < a.length)
+                        maxLenWord = a.length;
+                }
+            }
+
+
+        if(null != rowZero)
+            for(String s: rowZero){
+                if(maxLenWord < s.length())
+                    maxLenWord = s.length();
+            }
+
+        if(null != columnTitles)
+            for(String s: columnTitles){
+                if(maxLenWord < s.length())
+                    maxLenWord = s.length();
+            }
+            
+        if(null != header) {
+            if(maxLenWord < header.length())
+                maxLenWord = header.length();
+        }
+
+        maxLenRow = maxLenWord * noOfColumns;
+
+        if(null != header) {
+            // To center align the header string
+            int blank = maxLenRow/2 - header.length()/2;
+            int lenForHeaderFormat = blank + header.length();
+            ans.append(String.format("%" + lenForHeaderFormat + "s\n", header));
+        }
+
+        String formatString = "%" + maxLenRow/noOfColumns + "s | ";
+
         if(null != columnTitles){
             for(String s: columnTitles){
-                ans.append(String.format("%10s | ", s));
+                ans.append(String.format(formatString, s));
             }
             ans.append("\n");
         }
         if(null != rowZero){
             for(String s: rowZero){
-                ans.append(String.format("%10s | ", s));
+                ans.append(String.format(formatString, s));
             }
             ans.append("\n");
         }
         if(null != nRows){
             for(String a[]: nRows){
-
                 for(String s: a){
-                    ans.append(String.format("%10s | ", s));
+                    ans.append(String.format(formatString, s));
                 }
                 ans.append("\n");
             }
             ans.append("\n");
         }
-
 
         return ans.toString();
     }
