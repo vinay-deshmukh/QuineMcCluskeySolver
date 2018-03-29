@@ -1,9 +1,6 @@
 package Code;
 
-import Table.EssentialPrimeImplicantTable;
-import Table.PrimeImplicantTable;
-import Table.StepTable;
-import Table.UntickedTermsTable;
+import Table.*;
 
 import java.util.*;
 
@@ -11,6 +8,7 @@ public class QuineMcCluskey {
 
     private List <StepTable>listStepTables = new ArrayList<>();
     private PrimeImplicantTable primeImplicantTable = new PrimeImplicantTable();
+    private NumbersWithOneXTable numbersWithOneXTable = new NumbersWithOneXTable();
     private UntickedTermsTable untickedTermsTable = new UntickedTermsTable();
     private EssentialPrimeImplicantTable essentialPrimeImplicantTable = new EssentialPrimeImplicantTable();
 
@@ -20,6 +18,10 @@ public class QuineMcCluskey {
 
     public PrimeImplicantTable getPrimeImplicantTable() {
         return primeImplicantTable;
+    }
+
+    public NumbersWithOneXTable getNumbersWithOneXTable() {
+        return numbersWithOneXTable;
     }
 
     public UntickedTermsTable getUntickedTermsTable() {
@@ -48,6 +50,8 @@ public class QuineMcCluskey {
         System.out.println(qm.untickedTermsTable);
 
         System.out.println(qm.primeImplicantTable);
+
+        System.out.println(qm.numbersWithOneXTable);
 
         System.out.println(qm.essentialPrimeImplicantTable);
 
@@ -267,6 +271,8 @@ public class QuineMcCluskey {
         this.displayPITable(numbers,dontCare);
 
         Set<Integer> essentialMinterm = new HashSet<>();
+        int noOfOneX = 0;
+        ArrayList<String> crowList = new ArrayList<>();
         System.out.println("\n\nNumbers with only 1 X");
         for(Integer key : PI_Table.noOfXHashMap.keySet())
         {
@@ -275,8 +281,17 @@ public class QuineMcCluskey {
             {
                 System.out.println(key);
                 essentialMinterm.add(key);
+                crowList.add(String.valueOf(key));
             }
         }
+
+        String [][] crow = new String[crowList.size()][1];
+        int ci=0;
+        for(String as: crowList){
+            crow[ci] = new String[]{as};
+            ci++;
+        }
+        numbersWithOneXTable.setnRows(crow);
 
         System.out.println("\n\nThe Essential Prime Implicants are:");
         essentialPrimeImplicantTable.setHeader("Essential Implicants");
