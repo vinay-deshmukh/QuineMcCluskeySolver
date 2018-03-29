@@ -211,12 +211,11 @@ public class Step implements Cloneable
             return NONE;
     }
 
-    void display(List <StepTable> listStepTable)
+    void display(List <StepTable> listStepTable, String head)
     {
         StepTable stepTable = new StepTable();
 
-        //TODO Add steptable name as header
-        // ie Step 0, Step 1, etc
+        stepTable.setHeader(head);
 
         //System.out.println("Group Minterms BinaryRepresentation");
         System.out.format("%5s | %15s | %20s\n",

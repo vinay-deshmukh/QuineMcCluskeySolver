@@ -231,7 +231,7 @@ public class QuineMcCluskey {
         int stepNumber = 0;
         do {
             System.out.println("\n\n   DISPLAYING STEP "+stepNumber);
-            stepN0.display(listStepTables);
+            stepN0.display(listStepTables, "Step " +stepNumber);
             stepN1 = stepN0.createNextStep();
             stepN0 = stepN1;
             stepNumber++;
