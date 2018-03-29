@@ -31,6 +31,8 @@ public class Driver {
             System.out.println(s);
         }
 
+        System.out.println(driver.untickedTermsTable);
+
         System.out.println(driver.primeImplicantTable);
         //region Original Main
         /*
@@ -347,12 +349,21 @@ public class Driver {
         // An empty step signifies end of the calculation process
 
         System.out.println("\n\nUnticked terms");
+        untickedTermsTable.setHeader("Unticked Terms");
+        untickedTermsTable.setRowZero(null);
+        untickedTermsTable.setColumnTitles(new String[]{"Decimal Minterm", "Binary Representation"});
+        String [][] arows = new String[Step.untickedTerms.size()][2];
+        int k =0;
         for( Set<Integer> s : Step.untickedTerms)
         {
             System.out.format("%16s | %20s\n",
                     GroupSubEntries.correctString(s)
                     , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
+            arows[k] = new String[]{GroupSubEntries.correctString(s)
+                                   , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s))};
+            k++;
         }
+        untickedTermsTable.setnRows(arows);
 
         //Displaying the entire PI Table
         this.displayPITable(numbers,dontCare);
