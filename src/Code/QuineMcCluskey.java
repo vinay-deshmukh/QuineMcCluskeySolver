@@ -9,14 +9,28 @@ import java.util.*;
 
 public class QuineMcCluskey {
 
-    List <StepTable>listStepTables = new ArrayList<>();
-    PrimeImplicantTable primeImplicantTable = new PrimeImplicantTable();
-    UntickedTermsTable untickedTermsTable = new UntickedTermsTable();
-    EssentialPrimeImplicantTable essentialPrimeImplicantTable = new EssentialPrimeImplicantTable();
+    private List <StepTable>listStepTables = new ArrayList<>();
+    private PrimeImplicantTable primeImplicantTable = new PrimeImplicantTable();
+    private UntickedTermsTable untickedTermsTable = new UntickedTermsTable();
+    private EssentialPrimeImplicantTable essentialPrimeImplicantTable = new EssentialPrimeImplicantTable();
+
+    public List<StepTable> getListStepTables() {
+        return listStepTables;
+    }
+
+    public PrimeImplicantTable getPrimeImplicantTable() {
+        return primeImplicantTable;
+    }
+
+    public UntickedTermsTable getUntickedTermsTable() {
+        return untickedTermsTable;
+    }
+
+    public EssentialPrimeImplicantTable getEssentialPrimeImplicantTable() {
+        return essentialPrimeImplicantTable;
+    }
 
     public static void main(String args[]) {
-
-        //doQuineMcCluskey("4 8 10 11 12 15","9 14");
 
         QuineMcCluskey qm = new QuineMcCluskey();
 
@@ -36,128 +50,10 @@ public class QuineMcCluskey {
         System.out.println(qm.primeImplicantTable);
 
         System.out.println(qm.essentialPrimeImplicantTable);
-        //region Original Main
-        /*
-        System.out.println("Enter minterms");
-        Scanner sc = new Scanner(System.in);
-
-        List<Integer> dontCare = new ArrayList<>();
-        List<Integer> numsList = new ArrayList<>();
-
-        String line = sc.nextLine();
-        String numStr [] = line.split(" ");
-
-        int i=0;
-
-        for(String s : numStr) {
-            try {
-                // Adding the input numbers to a list containing the numbers
-                numsList.add(Integer.parseInt(s));
-                i++;
-            } catch (Exception e) {
-                System.out.println(s + " is invalid");
-            }
-        }
-
-        System.out.println("Enter don't care terms:");
-        line = sc.nextLine();
-        numStr = line.split(" ");
-        i = 0;
-        for(String s : numStr) {
-
-            //for no terms
-            if(numStr.length == 1)
-                break;
-
-            try {
-                // Adding the dont care numbers to the list containing the numbers
-                // and also in the list that hols dont care numbers
-                numsList.add(Integer.parseInt(s));
-                dontCare.add(Integer.parseInt(s));
-                i++;
-            } catch (Exception e) {
-                System.out.println(s + " is invalid");
-            }
-        }
-
-        //Converting the list to array
-        int numbers[] = new int[numsList.size()];
-        for(int j = 0; j< numsList.size(); j++)
-        {
-            numbers[j] = numsList.get(j);
-        }
-
-
-        //Initiliazing no of X as zero for all numbers
-        for(int j=0;j<numbers.length;j++)
-        {
-            // For each number, assign the value of number of X's as zero
-            // This value is assigned such that the key to refer to the value is
-            // the number itself, ie the number whose x are needed.
-            PrimeImplicantTable.noOfXHashMap.put(new Integer(numbers[j]), new Integer(0));
-        }
-
-
-        Step stepN0 = new Step(numbers);
-        Step stepN1;
-        int stepNumber = 0;
-        do {
-            System.out.println("\n\n   DISPLAYING STEP "+stepNumber);
-            stepN0.display();
-            stepN1 = stepN0.createNextStep();
-            stepN0 = stepN1;
-            stepNumber++;
-        }while(!stepN1.IsStepEmpty());
-        System.out.println("\n\nUnticked terms");
-        for( Set<Integer> s : Step.untickedTerms)
-        {
-            System.out.format("%16s %20s\n",
-                    GroupSubEntries.correctString(s)
-                    ,PrimeImplicantTable.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
-        }
-
-        //Displaying the entire PI Table
-        Driver.displayPITable(numbers,dontCare);
-
-        Set<Integer> essentialMinterm = new HashSet<>();
-        System.out.println("\n\nNumbers with only 1 X");
-        for(Integer key : PrimeImplicantTable.noOfXHashMap.keySet())
-        {
-            if(PrimeImplicantTable.noOfXHashMap.get(key) == 1)
-            {
-                System.out.println(key);
-                essentialMinterm.add(key);
-            }
-        }
-
-        System.out.println("\n\nThe Essential Prime Implicants are:");
-        Set<Set<Integer>> essentialPrimeImplicant = new HashSet<>();
-        for(Set<Integer> u : Step.untickedTerms)
-        {
-            //if u and essentialMinterm have common elements
-            // then u is ess PI
-            Set<Integer> hold = new HashSet<>(u);
-            hold.retainAll(essentialMinterm);
-            if(!hold.isEmpty())
-            {
-                essentialPrimeImplicant.add(u);
-            }
-
-        }
-
-        for( Set<Integer> s : essentialPrimeImplicant)
-        {
-            System.out.format("%16s %20s\n",
-                    GroupSubEntries.correctString(s)
-                    ,PrimeImplicantTable.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
-        }
-
-    */
-        //endregion
 
     }
 
-    void displayPITable(int [] numbers, List<Integer> dontCare)
+    private void displayPITable(int [] numbers, List<Integer> dontCare)
     {
         System.out.println("\n\nPRIME IMPLICANT TABLE");
         primeImplicantTable.setHeader("Prime Implicant Table");
@@ -206,7 +102,7 @@ public class QuineMcCluskey {
     }
 
     //misc
-    String [] CreateSingleRowInPITable(Set<Integer> s, int [] numbers, List<Integer> dontCare)
+    private String [] CreateSingleRowInPITable(Set<Integer> s, int [] numbers, List<Integer> dontCare)
     {
         String result="";
 
@@ -267,7 +163,7 @@ public class QuineMcCluskey {
     }
 
 
-    Object doQuineMcCluskey(String nums, String donts){
+    public Object doQuineMcCluskey(String nums, String donts){
 
         List<Integer> dontCare = new ArrayList<>();
         List<Integer> numsList = new ArrayList<>();
