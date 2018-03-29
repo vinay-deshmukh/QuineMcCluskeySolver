@@ -211,21 +211,21 @@ public class Step implements Cloneable
             return NONE;
     }
 
-    void display(List <StepTable> listStepTable, String head)
+    void createStepTableFromStep(List <StepTable> listStepTable, String head)
     {
         StepTable stepTable = new StepTable();
 
         stepTable.setHeader(head);
 
         //System.out.println("Group Minterms BinaryRepresentation");
-        System.out.format("%5s | %15s | %20s\n",
-                "Group",
-                "Minterms",
-                "BinaryRepresentation");
+//        System.out.format("%5s | %15s | %20s\n",
+//                "Group",
+//                "Minterms",
+//                "BinaryRepresentation");
         // Column Titles is already included in definition, so no need to set it here
 
-        System.out.format("%5s | %15s | %20s\n","","",
-        GroupSubEntries.correctString(GroupSubEntries.alphabets));
+//        System.out.format("%5s | %15s | %20s\n","","",
+//        GroupSubEntries.correctString(GroupSubEntries.alphabets));
 
         // Adding row Zero
         String [] a = {"", "", GroupSubEntries.correctString(GroupSubEntries.alphabets)};
@@ -242,10 +242,10 @@ public class Step implements Cloneable
         {
             for(GroupSubEntries gs : group[i])
             {
-                System.out.format("%5s | %15s | %20s\n",
-                        i,
-                        GroupSubEntries.correctString(gs.minterms),
-                        GroupSubEntries.correctString(gs.binaryRepresentation));
+//                System.out.format("%5s | %15s | %20s\n",
+//                        i,
+//                        GroupSubEntries.correctString(gs.minterms),
+//                        GroupSubEntries.correctString(gs.binaryRepresentation));
 
                 arows[rowNo][0] = String.valueOf(i);
                 arows[rowNo][1] = GroupSubEntries.correctString(gs.minterms);
