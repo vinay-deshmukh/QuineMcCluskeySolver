@@ -10,9 +10,9 @@ import java.util.*;
 public class Driver {
 
     List <StepTable>listStepTables = new ArrayList<>();
-    PrimeImplicantTable primeImplicantTable;
-    UntickedTermsTable untickedTermsTable;
-    EssentialPrimeImplicantTable essentialPrimeImplicantTable;
+    PrimeImplicantTable primeImplicantTable = new PrimeImplicantTable();
+    UntickedTermsTable untickedTermsTable = new UntickedTermsTable();
+    EssentialPrimeImplicantTable essentialPrimeImplicantTable = new EssentialPrimeImplicantTable();
 
     public static void main(String args[]) {
 
@@ -25,10 +25,13 @@ public class Driver {
 
         System.out.println("Steps in list:" + driver.listStepTables.size());
 
+        System.out.println("\nTO STRING OUTPUTS:\n");
         System.out.println("STEPS IN LIST:");
         for(StepTable s: driver.listStepTables){
             System.out.println(s);
         }
+
+        System.out.println(driver.primeImplicantTable);
         //region Original Main
         /*
         System.out.println("Enter minterms");
@@ -150,15 +153,17 @@ public class Driver {
 
     }
 
-    static void displayPITable(int [] numbers, List<Integer> dontCare)
+    void displayPITable(int [] numbers, List<Integer> dontCare)
     {
         System.out.println("\n\nPRIME IMPLICANT TABLE");
+        primeImplicantTable.setHeader("Prime Implicant Table");
 
         //First Line
         System.out.format("%16s | %16s | %20s\n",
                 "Prime Implicants",
                 "Decimal minterms",
                 "Minterms Given");
+        primeImplicantTable.setColumnTitles(new String[] {"Prime Implicants", "Decimal minterms", "Given Minterms"});
 
         String mintermsInARow = "";
         for( int a : numbers)
@@ -175,12 +180,86 @@ public class Driver {
                 "",
                 mintermsInARow);
 
+        primeImplicantTable.setRowZero(new String[] {"", "", mintermsInARow});
+
+        String [][] arows = new String[Step.untickedTerms.size()][3];
+
         //Printing the data rows
+        int i = 0;
         for(Set<Integer> s :Step.untickedTerms)
         {
-            PI_Table.CreateSingleRowInPITable(s, numbers,dontCare);
+            String[] oneRow = CreateSingleRowInPITable(s, numbers,dontCare);
+            arows[i][0] = oneRow[0];
+            arows[i][1] = oneRow[1];
+            arows[i][2] = oneRow[2];
+
+            i++;
+            //System.out.println(oneRow);
         }
 
+        primeImplicantTable.setnRows(arows);
+
+    }
+
+    //misc
+    String [] CreateSingleRowInPITable(Set<Integer> s, int [] numbers, List<Integer> dontCare)
+    {
+        String result="";
+
+        //Result of first column
+        List<Integer> binaryRepOfMinterm = Step.primeImplicantHashMap.get(s);
+        String PIalphabentForm = PI_Table.binaryRepToPIForm(binaryRepOfMinterm);
+
+        //Result of second column
+        String decimalNumbers = GroupSubEntries.correctString(s);
+
+        //Result of third column
+        String Xformat = "";
+
+        for(int i =0; i<numbers.length; i++)
+        {
+
+            int digits = 1;
+            int n = numbers[i];
+            while(n>9)
+            {
+                n=n/10;
+                digits++;
+            }
+
+            //Find if extra space needed before X
+            for(int j =0; j<digits-1; j++)
+                Xformat+=" ";
+
+            if(!dontCare.contains(numbers[i]))
+            {
+                Xformat+=" ";
+                Integer prevNoOfX = PI_Table.noOfXHashMap.get(numbers[i]);
+                if (s.contains(numbers[i]))
+                {
+                    Xformat += "X";
+                    PI_Table.noOfXHashMap.put(numbers[i], new Integer(prevNoOfX+1));
+                }
+                else {
+                    Xformat += "$";
+                    // Using $ instead of " " since parsing a blank space is not possible
+                    // A special TableLayout is needed for PrimeImplicantTable as
+                    // it has another table strucutre for it's X values
+                }
+            }
+
+        }
+
+
+        System.out.format("%16s | %16s | %20s\n",
+                PIalphabentForm,
+                decimalNumbers,
+                Xformat);
+
+        return new String[]{
+                PIalphabentForm,
+                decimalNumbers,
+                Xformat};
     }
 
 
@@ -276,7 +355,7 @@ public class Driver {
         }
 
         //Displaying the entire PI Table
-        Driver.displayPITable(numbers,dontCare);
+        this.displayPITable(numbers,dontCare);
 
         Set<Integer> essentialMinterm = new HashSet<>();
         System.out.println("\n\nNumbers with only 1 X");

@@ -39,13 +39,13 @@ public class BaseTable {
             ans.append(String.format("%10s\n", header));
         if(null != columnTitles){
             for(String s: columnTitles){
-                ans.append(String.format("%10s ", s));
+                ans.append(String.format("%10s | ", s));
             }
             ans.append("\n");
         }
         if(null != rowZero){
             for(String s: rowZero){
-                ans.append(String.format("%10s ", s));
+                ans.append(String.format("%10s | ", s));
             }
             ans.append("\n");
         }
@@ -53,7 +53,7 @@ public class BaseTable {
             for(String a[]: nRows){
 
                 for(String s: a){
-                    ans.append(String.format("%10s ", s));
+                    ans.append(String.format("%10s | ", s));
                 }
                 ans.append("\n");
             }
