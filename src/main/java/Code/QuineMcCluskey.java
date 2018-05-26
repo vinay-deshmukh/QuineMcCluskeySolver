@@ -32,31 +32,6 @@ public class QuineMcCluskey {
         return essentialPrimeImplicantTable;
     }
 
-    public static void main(String args[]) {
-
-        QuineMcCluskey qm = new QuineMcCluskey();
-
-        Set res1 = (Set) qm.doQuineMcCluskey("4 8 10 11 12 15","9 14");
-        //System.out.println(res1);
-
-        //System.out.println("Steps in list:" + qm.listStepTables.size());
-
-        //System.out.println("\nTO STRING OUTPUTS:\n");
-        //System.out.println("STEPS IN LIST:");
-        for(StepTable s: qm.listStepTables){
-            System.out.println(s);
-        }
-
-        System.out.println(qm.untickedTermsTable);
-
-        System.out.println(qm.primeImplicantTable);
-
-        System.out.println(qm.numbersWithOneXTable);
-
-        System.out.println(qm.essentialPrimeImplicantTable);
-
-    }
-
     private void generatePrimeImplicantTable(int [] numbers, List<Integer> dontCare)
     {
         //System.out.println("\n\nPRIME IMPLICANT TABLE");
