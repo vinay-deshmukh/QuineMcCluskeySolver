@@ -192,6 +192,15 @@ public class QuineMcCluskey {
                 dontCare.add(Integer.parseInt(s));
             }
         }
+
+        // Remove duplicates from the list whilst preserving order
+        // https://stackoverflow.com/questions/203984/how-do-i-remove-repeated-elements-from-arraylist/204004#204004
+
+        Set<Integer> temp = new LinkedHashSet<>(minterms);
+        minterms = new ArrayList<>(temp);
+
+        temp = new LinkedHashSet<>(dontCare);
+        dontCare = new ArrayList<>(temp);
     }
 
     private void clearMintermsDontCare(){
