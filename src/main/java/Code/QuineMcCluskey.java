@@ -163,6 +163,13 @@ public class QuineMcCluskey {
 
     private void parseStringToList(String string, int id){
 
+        if(id == DONT){
+            if(string.length() < 1){
+                // no dontcare terms
+                //return;
+            }
+        }
+
         // id can be one of two values
         // NUMS = Passed string contains minterms
         // ie add it to minterms
@@ -184,47 +191,12 @@ public class QuineMcCluskey {
 
     public Object doQuineMcCluskey(String nums, String donts){
 
-        List<Integer> dontCare = new ArrayList<>();
-        List<Integer> minterms = new ArrayList<>();
+        parseStringToList(nums, QuineMcCluskey.NUMS);
+        // Add the values to the list minterms
 
-        String line = nums;
-        String numStr [] = line.split(" ");
+        parseStringToList(donts, QuineMcCluskey.DONT);
+        // Add the values to the list minterms and dontCare
 
-        int i=0;
-
-        for(String s : numStr) {
-            try {
-                // Adding the input numbers to a list containing the numbers
-                minterms.add(Integer.parseInt(s));
-                i++;
-            } catch (Exception e) {
-                e.printStackTrace();
-//                System.out.println(s + " is invalid");
-            }
-        }
-
-//        System.out.println("Enter don't care terms:");
-        line = donts;
-        numStr = line.split(" ");
-        i = 0;
-        for(String s : numStr) {
-
-            //for no terms
-            if(numStr.length == 1)
-                break;
-
-            try {
-                // Adding the dont care numbers to the list containing the numbers
-                // and also in the list that hols dont care numbers
-                minterms.add(Integer.parseInt(s));
-                dontCare.add(Integer.parseInt(s));
-                i++;
-            } catch (Exception e) {
-                e.printStackTrace();
-//                System.out.println(s + " is invalid");
-
-            }
-        }
 
         //Converting the list to array
         // Can't use inbuilt function since that would give a
