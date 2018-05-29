@@ -15,6 +15,8 @@ public class QuineMcCluskey {
     private List <Integer> minterms = new ArrayList<>();
     private List <Integer> dontCare = new ArrayList<>();
 
+    private Set<Set<Integer>> resultEssentialPIs = new HashSet<>();
+
     public List<StepTable> getListStepTables() {
         return listStepTables;
     }
@@ -33,6 +35,10 @@ public class QuineMcCluskey {
 
     public EssentialPrimeImplicantTable getEssentialPrimeImplicantTable() {
         return essentialPrimeImplicantTable;
+    }
+
+    public Set<Set<Integer>> getResultEssentialPIs() {
+        return resultEssentialPIs;
     }
 
     private void generatePrimeImplicantTable(int [] numbers, List<Integer> dontCare)
@@ -193,7 +199,7 @@ public class QuineMcCluskey {
         dontCare = new ArrayList<>();
     }
 
-    public Object doQuineMcCluskey(String nums, String donts){
+    public void doQuineMcCluskey(String nums, String donts){
 
         // Clear the list values before starting new calculations
         // This is so that we can perform multiple calculations with the same object
@@ -296,7 +302,7 @@ public class QuineMcCluskey {
         essentialPrimeImplicantTable.setColumnTitles(new String [] {"Decimal Minterm", "Binary Representation"});
         essentialPrimeImplicantTable.setRowZero(null);
 
-        Set<Set<Integer>> essentialPrimeImplicant = new HashSet<>();
+        resultEssentialPIs = new HashSet<>();
         for(Set<Integer> u : Step.untickedTerms)
         {
             //if u and essentialMinterm have common elements
@@ -319,14 +325,14 @@ public class QuineMcCluskey {
             // ie u is a essential Prime Implicannt, since hold is a clone of u.
             if(!hold.isEmpty())
             {
-                essentialPrimeImplicant.add(u);
+                resultEssentialPIs.add(u);
             }
 
         }
 
-        String [][] brows = new String[essentialPrimeImplicant.size()][2];
+        String [][] brows = new String[resultEssentialPIs.size()][2];
         int ii=0;
-        for( Set<Integer> s : essentialPrimeImplicant)
+        for( Set<Integer> s : resultEssentialPIs)
         {
 //            System.out.format("%16s | %20s\n",
 //                    GroupSubEntries.correctString(s)
@@ -339,7 +345,7 @@ public class QuineMcCluskey {
 
         essentialPrimeImplicantTable.setnRows(brows);
 
-        return essentialPrimeImplicant;
+        //return resultEssentialPIs;
     }
 
 }

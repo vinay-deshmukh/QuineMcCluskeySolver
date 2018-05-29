@@ -116,8 +116,11 @@ public class QuineMcCluskeyTest1 {
             // Adding single expected result to list
             expectedList.add(expected);
 
+            // Calculate one result
+            qm.doQuineMcCluskey(inputMinterms, inputDonts);
+
             // Adding single actual result to list
-            resultList.add((Set) qm.doQuineMcCluskey(inputMinterms, inputDonts));
+            resultList.add(qm.getResultEssentialPIs());
 
             // Comparing for human reader
             stdout.printf("%70s = %-70s\n", expectedList.get(expectedList.size() -1 ),
