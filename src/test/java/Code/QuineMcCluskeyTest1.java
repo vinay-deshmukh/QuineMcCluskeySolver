@@ -103,9 +103,15 @@ public class QuineMcCluskeyTest1 {
         "1 3 7 9 10 11 13 15 = 10,11 ; 1,3,9,11 ; 3,7,11,15 ; 9,11,13,15",
         "0 1 2 8 10 11 14 15 = 0,1 ; 0,2,8,10 ; 10,11,14,15",
 
-        //Repeated numbers
+        // Repeated numbers
+        // TODO: Add all the inputs for repeated nums section
         "1 5 5 5 6 12 13 14 14 + 2 4 4 2 = 1,5 ; 4,5,12,13 ; 4,6,12,14",
         "0 0 0 1 3 4 4 4 5 6 11 13 14 15 = 0,1,4,5",
+
+        // Unsorted numbers input
+        // TODO: Add all inputs for unsorted numbers tests
+        "14 6 5 12 13 1 + 2 4 = 1,5 ; 4,5,12,13 ; 4,6,12,14",
+        "15 0 14 1 13 3 4 5 6 11 = 0,1,4,5",
         };
 
         List<Set> expectedList = new ArrayList<>();

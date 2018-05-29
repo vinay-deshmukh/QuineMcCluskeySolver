@@ -201,6 +201,10 @@ public class QuineMcCluskey {
 
         temp = new LinkedHashSet<>(dontCare);
         dontCare = new ArrayList<>(temp);
+
+        // Sort the lists:
+        Collections.sort(minterms);
+        Collections.sort(dontCare);
     }
 
     private void clearMintermsDontCare(){
