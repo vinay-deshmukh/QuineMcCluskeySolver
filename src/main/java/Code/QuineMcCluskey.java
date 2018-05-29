@@ -166,7 +166,7 @@ public class QuineMcCluskey {
         if(id == DONT){
             if(string.length() < 1){
                 // no dontcare terms
-                //return;
+                return;
             }
         }
 
@@ -188,8 +188,16 @@ public class QuineMcCluskey {
         }
     }
 
+    private void clearMintermsDontCare(){
+        minterms = new ArrayList<>();
+        dontCare = new ArrayList<>();
+    }
 
     public Object doQuineMcCluskey(String nums, String donts){
+
+        // Clear the list values before starting new calculations
+        // This is so that we can perform multiple calculations with the same object
+        clearMintermsDontCare();
 
         parseStringToList(nums, QuineMcCluskey.NUMS);
         // Add the values to the list minterms
