@@ -12,6 +12,9 @@ public class QuineMcCluskey {
     private UntickedTermsTable untickedTermsTable = new UntickedTermsTable();
     private EssentialPrimeImplicantTable essentialPrimeImplicantTable = new EssentialPrimeImplicantTable();
 
+    private List <Integer> minterms = new ArrayList<>();
+    private List <Integer> dontCare = new ArrayList<>();
+
     public List<StepTable> getListStepTables() {
         return listStepTables;
     }
@@ -154,11 +157,35 @@ public class QuineMcCluskey {
                 Xformat};
     }
 
+    // CONSTANT fields to decide what kind of string input.
+    private final static int NUMS = 3;
+    private final static int DONT = 4;
+
+    private void parseStringToList(String string, int id){
+
+        // id can be one of two values
+        // NUMS = Passed string contains minterms
+        // ie add it to minterms
+        // DONT = Passed string contains dont care terms
+        // ie add it to both minterms and dontCare
+
+        String [] s_arr = string.split(" ");
+        for(String s: s_arr){
+            if(id == NUMS){
+                minterms.add(Integer.parseInt(s));
+            }
+            else if(id == DONT){
+                minterms.add(Integer.parseInt(s));
+                dontCare.add(Integer.parseInt(s));
+            }
+        }
+    }
+
 
     public Object doQuineMcCluskey(String nums, String donts){
 
         List<Integer> dontCare = new ArrayList<>();
-        List<Integer> numsList = new ArrayList<>();
+        List<Integer> minterms = new ArrayList<>();
 
         String line = nums;
         String numStr [] = line.split(" ");
@@ -168,7 +195,7 @@ public class QuineMcCluskey {
         for(String s : numStr) {
             try {
                 // Adding the input numbers to a list containing the numbers
-                numsList.add(Integer.parseInt(s));
+                minterms.add(Integer.parseInt(s));
                 i++;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -189,7 +216,7 @@ public class QuineMcCluskey {
             try {
                 // Adding the dont care numbers to the list containing the numbers
                 // and also in the list that hols dont care numbers
-                numsList.add(Integer.parseInt(s));
+                minterms.add(Integer.parseInt(s));
                 dontCare.add(Integer.parseInt(s));
                 i++;
             } catch (Exception e) {
@@ -203,10 +230,10 @@ public class QuineMcCluskey {
         // Can't use inbuilt function since that would give a
         // Integer[], and not int[]
         // And int[] has been used in a lot of places, which is inconvenient to rewrite
-        int numbers[] = new int[numsList.size()];
-        for(int j = 0; j< numsList.size(); j++)
+        int numbers[] = new int[minterms.size()];
+        for(int j = 0; j< minterms.size(); j++)
         {
-            numbers[j] = numsList.get(j);
+            numbers[j] = minterms.get(j);
         }
 
 
