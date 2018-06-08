@@ -43,14 +43,7 @@ public class QuineMcCluskey {
 
     private void generatePrimeImplicantTable(int [] numbers, List<Integer> dontCare)
     {
-        //System.out.println("\n\nPRIME IMPLICANT TABLE");
         primeImplicantTable.setHeader("Prime Implicant Table");
-
-        //First Line
-//        System.out.format("%16s | %16s | %20s\n",
-//                "Prime Implicants",
-//                "Decimal minterms",
-//                "Minterms Given");
         primeImplicantTable.setColumnTitles(new String[] {"Prime Implicants", "Decimal minterms", "Given Minterms"});
 
         int max = numbers[0];
@@ -71,11 +64,6 @@ public class QuineMcCluskey {
                 mintermsInARow+=" "+String.format(formatForOneChar, a);
         }
 
-        //Second Line
-//        System.out.format("%16s | %16s | %20s\n",
-//                "",
-//                "",
-//                mintermsInARow);
 
         primeImplicantTable.setRowZero(new String[] {"", "", mintermsInARow});
 
@@ -91,7 +79,6 @@ public class QuineMcCluskey {
             arows[i][2] = oneRow[2];
 
             i++;
-            //System.out.println(oneRow);
         }
 
         primeImplicantTable.setnRows(arows);
@@ -124,9 +111,6 @@ public class QuineMcCluskey {
                 digits++;
             }
 
-            //Find if extra space needed before X
-//            for(int j =0; j<digits-1; j++)
-//                Xformat+=" ";
 
             if(!dontCare.contains(numbers[i]))
             {
@@ -146,12 +130,6 @@ public class QuineMcCluskey {
             }
 
         }
-
-
-//        System.out.format("%16s | %16s | %20s\n",
-//                PIalphabentForm,
-//                decimalNumbers,
-//                Xformat);
 
         return new String[]{
                 PIalphabentForm,
@@ -297,7 +275,6 @@ public class QuineMcCluskey {
         Step stepN1;
         int stepNumber = 0;
         do {
-//            System.out.println("\n\n   DISPLAYING STEP "+stepNumber);
             stepN0.createStepTableFromStep(listStepTables, "Step " +stepNumber);
             stepN1 = stepN0.createNextStep();
             stepN0 = stepN1;
@@ -313,7 +290,6 @@ public class QuineMcCluskey {
         // But when there exist no such pairs, then the step generated will be empty
         // An empty step signifies end of the calculation process
 
-//        System.out.println("\n\nUnticked terms");
         untickedTermsTable.setHeader("Unticked Terms");
         untickedTermsTable.setRowZero(null);
         untickedTermsTable.setColumnTitles(new String[]{"Decimal Minterm", "Binary Representation"});
@@ -321,9 +297,6 @@ public class QuineMcCluskey {
         int k =0;
         for( Set<Integer> s : Step.untickedTerms)
         {
-//            System.out.format("%16s | %20s\n",
-//                    GroupSubEntries.correctString(s)
-//                    , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
             arows[k] = new String[]{GroupSubEntries.correctString(s)
                                    , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s))};
             k++;
@@ -334,15 +307,14 @@ public class QuineMcCluskey {
         this.generatePrimeImplicantTable(numbers,dontCare);
 
         Set<Integer> essentialMinterm = new HashSet<>();
-        int noOfOneX = 0;
         ArrayList<String> crowList = new ArrayList<>();
-//        System.out.println("\n\nNumbers with only 1 X");
+
+
         for(Integer key : PI_Table.noOfXHashMap.keySet())
         {
             // Find minterm which has only 1 X
             if(PI_Table.noOfXHashMap.get(key) == 1)
             {
-//                System.out.println(key);
                 essentialMinterm.add(key);
                 crowList.add(String.valueOf(key));
             }
@@ -356,7 +328,7 @@ public class QuineMcCluskey {
         }
         numbersWithOneXTable.setnRows(crow);
 
-//        System.out.println("\n\nThe Essential Prime Implicants are:");
+
         essentialPrimeImplicantTable.setHeader("Essential Implicants");
         essentialPrimeImplicantTable.setColumnTitles(new String [] {"Decimal Minterm", "Binary Representation"});
         essentialPrimeImplicantTable.setRowZero(null);
@@ -393,10 +365,6 @@ public class QuineMcCluskey {
         int ii=0;
         for( Set<Integer> s : resultEssentialPIs)
         {
-//            System.out.format("%16s | %20s\n",
-//                    GroupSubEntries.correctString(s)
-//                    , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s)));
-
             brows[ii][0] = GroupSubEntries.correctString(s);
             brows[ii][1] = PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s));
             ii++;
@@ -404,7 +372,9 @@ public class QuineMcCluskey {
 
         essentialPrimeImplicantTable.setnRows(brows);
 
-        //return resultEssentialPIs;
+        // getResultEssentialPIs()
+        // Use this to get the answer
+
     }
 
 }
