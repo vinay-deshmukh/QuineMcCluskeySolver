@@ -58,11 +58,7 @@ public class QuineMcCluskey {
             if(max < n)
                 max = n;
 
-        int noOfDigits = 0;
-        while( max%10 != 0) {
-            noOfDigits++;
-            max /= 10;
-        }
+        int noOfDigits = noOfDigits(max);
 
         String formatForOneChar = "%" + noOfDigits + "s";
 
@@ -210,6 +206,50 @@ public class QuineMcCluskey {
     private void clearMintermsDontCare(){
         minterms = new ArrayList<>();
         dontCare = new ArrayList<>();
+    }
+
+    private int noOfDigits(int number){
+        // Method returns the number of digits in a number
+
+        // Source: http://www.baeldung.com/java-number-of-digits-in-int
+        // Divide and conquer implementation is the fastest
+        if (number < 100000) {
+            if (number < 100) {
+                if (number < 10) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            } else {
+                if (number < 1000) {
+                    return 3;
+                } else {
+                    if (number < 10000) {
+                        return 4;
+                    } else {
+                        return 5;
+                    }
+                }
+            }
+        } else {
+            if (number < 10000000) {
+                if (number < 1000000) {
+                    return 6;
+                } else {
+                    return 7;
+                }
+            } else {
+                if (number < 100000000) {
+                    return 8;
+                } else {
+                    if (number < 1000000000) {
+                        return 9;
+                    } else {
+                        return 10;
+                    }
+                }
+            }
+        }
     }
 
     public void doQuineMcCluskey(String nums, String donts){
