@@ -32,6 +32,19 @@ public class Driver {
 
         System.out.println(qm.getEssentialPrimeImplicantTable());
 
+        System.out.println("\n\nHTML:\n\n");
+
+        for(StepTable s: qm.getListStepTables()){
+            System.out.println(s.toHTMLString());
+        }
+
+        System.out.println(qm.getUntickedTermsTable().toHTMLString());
+
+        System.out.println(qm.getPrimeImplicantTable().toHTMLString());
+
+        System.out.println(qm.getNumbersWithOneXTable().toHTMLString());
+
+        System.out.println(qm.getEssentialPrimeImplicantTable().toHTMLString());
 
 
     }

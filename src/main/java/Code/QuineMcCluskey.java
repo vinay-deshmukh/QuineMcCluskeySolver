@@ -282,7 +282,8 @@ public class QuineMcCluskey {
 
         // Create the StepTable(s) from Step(s)
         for (int stepNumber = 0; stepNumber < stepList.size(); stepNumber++) {
-            stepList.get(stepNumber).createStepTableFromStep(listStepTables, "Step " + stepNumber);
+            if(!stepList.isEmpty())
+                stepList.get(stepNumber).createStepTableFromStep(listStepTables, "Step " + stepNumber);
         }
 
         untickedTermsTable.setHeader("Unticked Terms");

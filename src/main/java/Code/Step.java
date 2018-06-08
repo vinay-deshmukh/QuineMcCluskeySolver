@@ -200,7 +200,7 @@ public class Step implements Cloneable {
         stepTable.setHeader(head);
 
         // Adding row Zero
-        String[] a = {"", "", GroupSubEntries.correctString(GroupSubEntries.alphabets)};
+        String[] a = {"", "", GroupSubEntries.correctString(GroupSubEntries.alphabets), ""};
         stepTable.setRowZero(a);
 
         int noOfRows = 0;
