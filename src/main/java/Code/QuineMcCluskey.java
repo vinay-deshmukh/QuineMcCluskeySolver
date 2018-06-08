@@ -6,15 +6,16 @@ import java.util.*;
 
 public class QuineMcCluskey {
 
-    private List <StepTable>listStepTables = new ArrayList<>();
+    // CONSTANT fields to decide what kind of string input.
+    private final static int NUMS = 3;
+    private final static int DONT = 4;
+    private List<StepTable> listStepTables = new ArrayList<>();
     private PrimeImplicantTable primeImplicantTable = new PrimeImplicantTable();
     private NumbersWithOneXTable numbersWithOneXTable = new NumbersWithOneXTable();
     private UntickedTermsTable untickedTermsTable = new UntickedTermsTable();
     private EssentialPrimeImplicantTable essentialPrimeImplicantTable = new EssentialPrimeImplicantTable();
-
-    private List <Integer> minterms = new ArrayList<>();
-    private List <Integer> dontCare = new ArrayList<>();
-
+    private List<Integer> minterms = new ArrayList<>();
+    private List<Integer> dontCare = new ArrayList<>();
     private Set<Set<Integer>> resultEssentialPIs = new HashSet<>();
 
     public List<StepTable> getListStepTables() {
@@ -41,14 +42,13 @@ public class QuineMcCluskey {
         return resultEssentialPIs;
     }
 
-    private void generatePrimeImplicantTable(int [] numbers, List<Integer> dontCare)
-    {
+    private void generatePrimeImplicantTable(int[] numbers, List<Integer> dontCare) {
         primeImplicantTable.setHeader("Prime Implicant Table");
-        primeImplicantTable.setColumnTitles(new String[] {"Prime Implicants", "Decimal minterms", "Given Minterms"});
+        primeImplicantTable.setColumnTitles(new String[]{"Prime Implicants", "Decimal minterms", "Given Minterms"});
 
         int max = numbers[0];
-        for(int n: numbers)
-            if(max < n)
+        for (int n : numbers)
+            if (max < n)
                 max = n;
 
         int noOfDigits = noOfDigits(max);
@@ -56,24 +56,22 @@ public class QuineMcCluskey {
         String formatForOneChar = "%" + noOfDigits + "s";
 
         String mintermsInARow = "";
-        for( int a : numbers)
-        {
-            if(dontCare.contains(a))
+        for (int a : numbers) {
+            if (dontCare.contains(a))
                 continue;
             else
-                mintermsInARow+=" "+String.format(formatForOneChar, a);
+                mintermsInARow += " " + String.format(formatForOneChar, a);
         }
 
 
-        primeImplicantTable.setRowZero(new String[] {"", "", mintermsInARow});
+        primeImplicantTable.setRowZero(new String[]{"", "", mintermsInARow});
 
-        String [][] arows = new String[Step.untickedTerms.size()][3];
+        String[][] arows = new String[Step.untickedTerms.size()][3];
 
         //Printing the data rows
         int i = 0;
-        for(Set<Integer> s :Step.untickedTerms)
-        {
-            String[] oneRow = CreateSingleRowInPITable(s, numbers,dontCare, formatForOneChar);
+        for (Set<Integer> s : Step.untickedTerms) {
+            String[] oneRow = CreateSingleRowInPITable(s, numbers, dontCare, formatForOneChar);
             arows[i][0] = oneRow[0];
             arows[i][1] = oneRow[1];
             arows[i][2] = oneRow[2];
@@ -86,9 +84,8 @@ public class QuineMcCluskey {
     }
 
     //misc
-    private String [] CreateSingleRowInPITable(Set<Integer> s, int [] numbers,
-                                               List<Integer> dontCare, String formatForOneChar)
-    {
+    private String[] CreateSingleRowInPITable(Set<Integer> s, int[] numbers,
+                                              List<Integer> dontCare, String formatForOneChar) {
 
         //Result of first column
         List<Integer> binaryRepOfMinterm = Step.primeImplicantHashMap.get(s);
@@ -100,29 +97,24 @@ public class QuineMcCluskey {
         //Result of third column
         String Xformat = "";
 
-        for(int i =0; i<numbers.length; i++)
-        {
+        for (int i = 0; i < numbers.length; i++) {
 
             int digits = 1;
             int n = numbers[i];
-            while(n>9)
-            {
-                n=n/10;
+            while (n > 9) {
+                n = n / 10;
                 digits++;
             }
 
 
-            if(!dontCare.contains(numbers[i]))
-            {
-                Xformat+=" ";
+            if (!dontCare.contains(numbers[i])) {
+                Xformat += " ";
                 Integer prevNoOfX = PI_Table.noOfXHashMap.get(numbers[i]);
-                if (s.contains(numbers[i]))
-                {
+                if (s.contains(numbers[i])) {
                     Xformat += String.format(formatForOneChar, "X");
-                    PI_Table.noOfXHashMap.put(numbers[i], new Integer(prevNoOfX+1));
-                }
-                else {
-                    Xformat += String.format(formatForOneChar,"$");
+                    PI_Table.noOfXHashMap.put(numbers[i], new Integer(prevNoOfX + 1));
+                } else {
+                    Xformat += String.format(formatForOneChar, "$");
                     // Using $ instead of " " since parsing a blank space is not possible
                     // A special TableLayout is needed for PrimeImplicantTable as
                     // it has another table strucutre for it's X values
@@ -137,14 +129,10 @@ public class QuineMcCluskey {
                 Xformat};
     }
 
-    // CONSTANT fields to decide what kind of string input.
-    private final static int NUMS = 3;
-    private final static int DONT = 4;
+    private void parseStringToList(String string, int id) {
 
-    private void parseStringToList(String string, int id){
-
-        if(id == DONT){
-            if(string.length() < 1){
+        if (id == DONT) {
+            if (string.length() < 1) {
                 // no dontcare terms
                 return;
             }
@@ -156,12 +144,11 @@ public class QuineMcCluskey {
         // DONT = Passed string contains dont care terms
         // ie add it to both minterms and dontCare
 
-        String [] s_arr = string.split(" ");
-        for(String s: s_arr){
-            if(id == NUMS){
+        String[] s_arr = string.split(" ");
+        for (String s : s_arr) {
+            if (id == NUMS) {
                 minterms.add(Integer.parseInt(s));
-            }
-            else if(id == DONT){
+            } else if (id == DONT) {
                 minterms.add(Integer.parseInt(s));
                 dontCare.add(Integer.parseInt(s));
             }
@@ -182,7 +169,7 @@ public class QuineMcCluskey {
     }
 
 
-    private int noOfDigits(int number){
+    private int noOfDigits(int number) {
         // Method returns the number of digits in a number
 
         // Source: http://www.baeldung.com/java-number-of-digits-in-int
@@ -226,7 +213,7 @@ public class QuineMcCluskey {
         }
     }
 
-    public void doQuineMcCluskey(String nums, String donts){
+    public void doQuineMcCluskey(String nums, String donts) {
 
         // Clear the list values before starting new calculations
         // This is so that we can perform multiple calculations with the same object
@@ -254,15 +241,13 @@ public class QuineMcCluskey {
         // Integer[], and not int[]
         // And int[] has been used in a lot of places, which is inconvenient to rewrite
         int numbers[] = new int[minterms.size()];
-        for(int j = 0; j< minterms.size(); j++)
-        {
+        for (int j = 0; j < minterms.size(); j++) {
             numbers[j] = minterms.get(j);
         }
 
 
         //Initiliazing no of X as zero for all numbers
-        for(int j=0;j<numbers.length;j++)
-        {
+        for (int j = 0; j < numbers.length; j++) {
             // For each number, assign the value of number of X's as zero
             // This value is assigned such that the key to refer to the value is
             // the number itself, ie the number whose x are needed.
@@ -272,14 +257,19 @@ public class QuineMcCluskey {
 
         // Actual Working started
         Step stepN0 = new Step(numbers);
+        List<Step> stepList = new ArrayList<>();
+        stepList.add(stepN0);
         Step stepN1;
-        int stepNumber = 0;
+
         do {
-            stepN0.createStepTableFromStep(listStepTables, "Step " +stepNumber);
+            //Create the stepTable after all are calculated since
+            // we decide the ticked terms after we have calculated the next step
+            //stepN0.createStepTableFromStep(listStepTables, "Step " +stepNumber);
             stepN1 = stepN0.createNextStep();
+            stepList.add(stepN1);
             stepN0 = stepN1;
-            stepNumber++;
-        }while(!stepN1.IsStepEmpty());
+
+        } while (!stepN1.IsStepEmpty());
         // We check for if step is empty since
         // Step is generated from BinaryRepresentation where
         // we have a pair of minterms like
@@ -290,39 +280,41 @@ public class QuineMcCluskey {
         // But when there exist no such pairs, then the step generated will be empty
         // An empty step signifies end of the calculation process
 
+        // Create the StepTable(s) from Step(s)
+        for (int stepNumber = 0; stepNumber < stepList.size(); stepNumber++) {
+            stepList.get(stepNumber).createStepTableFromStep(listStepTables, "Step " + stepNumber);
+        }
+
         untickedTermsTable.setHeader("Unticked Terms");
         untickedTermsTable.setRowZero(null);
         untickedTermsTable.setColumnTitles(new String[]{"Decimal Minterm", "Binary Representation"});
-        String [][] arows = new String[Step.untickedTerms.size()][2];
-        int k =0;
-        for( Set<Integer> s : Step.untickedTerms)
-        {
+        String[][] arows = new String[Step.untickedTerms.size()][2];
+        int k = 0;
+        for (Set<Integer> s : Step.untickedTerms) {
             arows[k] = new String[]{GroupSubEntries.correctString(s)
-                                   , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s))};
+                    , PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s))};
             k++;
         }
         untickedTermsTable.setnRows(arows);
 
         //Displaying the entire PI Table
-        this.generatePrimeImplicantTable(numbers,dontCare);
+        this.generatePrimeImplicantTable(numbers, dontCare);
 
         Set<Integer> essentialMinterm = new HashSet<>();
         ArrayList<String> crowList = new ArrayList<>();
 
 
-        for(Integer key : PI_Table.noOfXHashMap.keySet())
-        {
+        for (Integer key : PI_Table.noOfXHashMap.keySet()) {
             // Find minterm which has only 1 X
-            if(PI_Table.noOfXHashMap.get(key) == 1)
-            {
+            if (PI_Table.noOfXHashMap.get(key) == 1) {
                 essentialMinterm.add(key);
                 crowList.add(String.valueOf(key));
             }
         }
 
-        String [][] crow = new String[crowList.size()][1];
-        int ci=0;
-        for(String as: crowList){
+        String[][] crow = new String[crowList.size()][1];
+        int ci = 0;
+        for (String as : crowList) {
             crow[ci] = new String[]{as};
             ci++;
         }
@@ -330,12 +322,11 @@ public class QuineMcCluskey {
 
 
         essentialPrimeImplicantTable.setHeader("Essential Implicants");
-        essentialPrimeImplicantTable.setColumnTitles(new String [] {"Decimal Minterm", "Binary Representation"});
+        essentialPrimeImplicantTable.setColumnTitles(new String[]{"Decimal Minterm", "Binary Representation"});
         essentialPrimeImplicantTable.setRowZero(null);
 
         resultEssentialPIs = new HashSet<>();
-        for(Set<Integer> u : Step.untickedTerms)
-        {
+        for (Set<Integer> u : Step.untickedTerms) {
             //if u and essentialMinterm have common elements
             // then u is ess PI
 
@@ -354,17 +345,15 @@ public class QuineMcCluskey {
 
             // If there are some common elements, set hold will not be empty.
             // ie u is a essential Prime Implicannt, since hold is a clone of u.
-            if(!hold.isEmpty())
-            {
+            if (!hold.isEmpty()) {
                 resultEssentialPIs.add(u);
             }
 
         }
 
-        String [][] brows = new String[resultEssentialPIs.size()][2];
-        int ii=0;
-        for( Set<Integer> s : resultEssentialPIs)
-        {
+        String[][] brows = new String[resultEssentialPIs.size()][2];
+        int ii = 0;
+        for (Set<Integer> s : resultEssentialPIs) {
             brows[ii][0] = GroupSubEntries.correctString(s);
             brows[ii][1] = PI_Table.binaryRepToPIForm(Step.primeImplicantHashMap.get(s));
             ii++;
