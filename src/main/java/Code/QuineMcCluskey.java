@@ -203,10 +203,6 @@ public class QuineMcCluskey {
         Collections.sort(dontCare);
     }
 
-    private void clearMintermsDontCare(){
-        minterms = new ArrayList<>();
-        dontCare = new ArrayList<>();
-    }
 
     private int noOfDigits(int number){
         // Method returns the number of digits in a number
@@ -256,7 +252,17 @@ public class QuineMcCluskey {
 
         // Clear the list values before starting new calculations
         // This is so that we can perform multiple calculations with the same object
-        clearMintermsDontCare();
+        minterms.clear();
+        dontCare.clear();
+
+        // Clear the tables before starting new calculations
+        // This i so that we can perform multiple calculations with the same object
+        listStepTables.clear();
+        primeImplicantTable.setnRows(null);
+        numbersWithOneXTable.setnRows(null);
+        untickedTermsTable.setnRows(null);
+        essentialPrimeImplicantTable.setnRows(null);
+
 
         parseStringToList(nums, QuineMcCluskey.NUMS);
         // Add the values to the list minterms
