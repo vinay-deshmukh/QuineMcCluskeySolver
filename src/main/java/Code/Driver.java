@@ -1,7 +1,10 @@
 package Code;
 
+import Table.BaseTable;
 import Table.StepTable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class Driver {
@@ -45,6 +48,21 @@ public class Driver {
         System.out.println(qm.getNumbersWithOneXTable().toHTMLString());
 
         System.out.println(qm.getEssentialPrimeImplicantTable().toHTMLString());
+
+        System.out.println("============================");
+        System.out.println("FULL HTML FILE:");
+        System.out.println("============================");
+
+
+        List<BaseTable> listOfTablesToHTML = new ArrayList<>();
+        listOfTablesToHTML.addAll(qm.getListStepTables());
+        listOfTablesToHTML.add(qm.getUntickedTermsTable());
+        listOfTablesToHTML.add(qm.getPrimeImplicantTable());
+        listOfTablesToHTML.add(qm.getNumbersWithOneXTable());
+        listOfTablesToHTML.add(qm.getEssentialPrimeImplicantTable());
+
+        System.out.println(HTMLTable.getHTMLFile(listOfTablesToHTML));
+
 
 
     }
