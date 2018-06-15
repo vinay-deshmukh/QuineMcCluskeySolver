@@ -114,366 +114,332 @@
         <td>- 1 0 0</td>
     </tr>
 </table>
-
 <br />
-
-
-
 <table>
-    <tr>
-        <th colspan="4">Step 0</th>
-    </tr>
-    <tr>
-        <th>Group</th>
-        <th>Minterms</th>
-        <th>Binary Representation</th>
-        <th>Ticked</th>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td>A B C D</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>4</td>
-        <td>0 1 0 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>8</td>
-        <td>1 0 0 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>9</td>
-        <td>1 0 0 1</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>10</td>
-        <td>1 0 1 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>12</td>
-        <td>1 1 0 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>11</td>
-        <td>1 0 1 1</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>14</td>
-        <td>1 1 1 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>15</td>
-        <td>1 1 1 1</td>
-        <td>T</td>
-    </tr>
+	<tr>
+		<th colspan="4">Step 0</th>
+	</tr>
+	<tr>
+		<th>Group</th>
+		<th>Minterms</th>
+		<th>Binary Representation</th>
+		<th>Ticked</th>
+	</tr>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>A B C D</th>
+		<th></th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>4</td>
+		<td>0 1 0 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>8</td>
+		<td>1 0 0 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>9</td>
+		<td>1 0 0 1</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>10</td>
+		<td>1 0 1 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>12</td>
+		<td>1 1 0 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>11</td>
+		<td>1 0 1 1</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>14</td>
+		<td>1 1 1 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>15</td>
+		<td>1 1 1 1</td>
+		<td>T</td>
+	</tr>
 </table>
-
-<br />
-
-<table>
-    <tr>
-        <th colspan="4">Step 1</th>
-    </tr>
-    <tr>
-        <th>Group</th>
-        <th>Minterms</th>
-        <th>Binary Representation</th>
-        <th>Ticked</th>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td>A B C D</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>4, 12</td>
-        <td>- 1 0 0</td>
-        <td>N</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>8, 9</td>
-        <td>1 0 0 -</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>8, 10</td>
-        <td>1 0 - 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>8, 12</td>
-        <td>1 - 0 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>9, 11</td>
-        <td>1 0 - 1</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>10, 11</td>
-        <td>1 0 1 -</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>10, 14</td>
-        <td>1 - 1 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>12, 14</td>
-        <td>1 1 - 0</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>11, 15</td>
-        <td>1 - 1 1</td>
-        <td>T</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>14, 15</td>
-        <td>1 1 1 -</td>
-        <td>T</td>
-    </tr>
+<br/><table>
+	<tr>
+		<th colspan="4">Step 1</th>
+	</tr>
+	<tr>
+		<th>Group</th>
+		<th>Minterms</th>
+		<th>Binary Representation</th>
+		<th>Ticked</th>
+	</tr>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>A B C D</th>
+		<th></th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>4, 12</td>
+		<td>- 1 0 0</td>
+		<td>N</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>8, 9</td>
+		<td>1 0 0 -</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>8, 10</td>
+		<td>1 0 - 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>8, 12</td>
+		<td>1 - 0 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>9, 11</td>
+		<td>1 0 - 1</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>10, 11</td>
+		<td>1 0 1 -</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>10, 14</td>
+		<td>1 - 1 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>12, 14</td>
+		<td>1 1 - 0</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>11, 15</td>
+		<td>1 - 1 1</td>
+		<td>T</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>14, 15</td>
+		<td>1 1 1 -</td>
+		<td>T</td>
+	</tr>
 </table>
-
-<br />
-
-
-<table>
-    <tr>
-        <th colspan="4">Step 2</th>
-    </tr>
-    <tr>
-        <th>Group</th>
-        <th>Minterms</th>
-        <th>Binary Representation</th>
-        <th>Ticked</th>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td>A B C D</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>8, 9, 10, 11</td>
-        <td>1 0 - -</td>
-        <td>N</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>8, 9, 10, 11</td>
-        <td>1 0 - -</td>
-        <td>N</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>8, 10, 12, 14</td>
-        <td>1 - - 0</td>
-        <td>N</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>8, 10, 12, 14</td>
-        <td>1 - - 0</td>
-        <td>N</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>10, 11, 14, 15</td>
-        <td>1 - 1 -</td>
-        <td>N</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>10, 11, 14, 15</td>
-        <td>1 - 1 -</td>
-        <td>N</td>
-    </tr>
+<br/><table>
+	<tr>
+		<th colspan="4">Step 2</th>
+	</tr>
+	<tr>
+		<th>Group</th>
+		<th>Minterms</th>
+		<th>Binary Representation</th>
+		<th>Ticked</th>
+	</tr>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>A B C D</th>
+		<th></th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>8, 9, 10, 11</td>
+		<td>1 0 - -</td>
+		<td>N</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>8, 9, 10, 11</td>
+		<td>1 0 - -</td>
+		<td>N</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>8, 10, 12, 14</td>
+		<td>1 - - 0</td>
+		<td>N</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>8, 10, 12, 14</td>
+		<td>1 - - 0</td>
+		<td>N</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>10, 11, 14, 15</td>
+		<td>1 - 1 -</td>
+		<td>N</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>10, 11, 14, 15</td>
+		<td>1 - 1 -</td>
+		<td>N</td>
+	</tr>
 </table>
-
-<br />
-
-
-<table>
-    <tr>
-        <th colspan="4">Step 3</th>
-    </tr>
-    <tr>
-        <th>Group</th>
-        <th>Minterms</th>
-        <th>Binary Representation</th>
-        <th>Ticked</th>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td>A B C D</td>
-        <td></td>
-    </tr>
+<br/><table>
+	<tr>
+		<th colspan="4">Step 3</th>
+	</tr>
+	<tr>
+		<th>Group</th>
+		<th>Minterms</th>
+		<th>Binary Representation</th>
+		<th>Ticked</th>
+	</tr>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>A B C D</th>
+		<th></th>
+	</tr>
 </table>
-
-<br />
-
-
-<table>
-    <tr>
-        <th colspan="2">Unticked Terms</th>
-    </tr>
-    <tr>
-        <th>Decimal Minterm</th>
-        <th>Binary Representation</th>
-    </tr>
-    <tr>
-        <td>4, 12</td>
-        <td>  B ~C ~D</td>
-    </tr>
-    <tr>
-        <td>10, 11, 14, 15</td>
-        <td>  A  C</td>
-    </tr>
-    <tr>
-        <td>8, 9, 10, 11</td>
-        <td>  A ~B</td>
-    </tr>
-    <tr>
-        <td>8, 10, 12, 14</td>
-        <td>  A ~D</td>
-    </tr>
+<br/><table>
+	<tr>
+		<th colspan="2">Unticked Terms</th>
+	</tr>
+	<tr>
+		<th>Decimal Minterm</th>
+		<th>Binary Representation</th>
+	</tr>
+	<tr>
+		<td>4, 12</td>
+		<td>  B ~C ~D</td>
+	</tr>
+	<tr>
+		<td>10, 11, 14, 15</td>
+		<td>  A  C</td>
+	</tr>
+	<tr>
+		<td>8, 9, 10, 11</td>
+		<td>  A ~B</td>
+	</tr>
+	<tr>
+		<td>8, 10, 12, 14</td>
+		<td>  A ~D</td>
+	</tr>
 </table>
-
-<br />
-
-
-<table>
-    <tr>
-        <th colspan="8">Prime Implicant Table</th>
-    </tr>
-    <tr>
-        <th>Prime Implicants</th>
-        <th>Decimal minterms</th>
-        <th colspan="6">Given Minterms</th>
-    </tr>
-    <tr>
-        <th></th>
-        <th></th>
-        <th>4		</th>
-        <th>8		</th>
-        <th>10		</th>
-        <th>11		</th>
-        <th>12		</th>
-        <th>15		</th>
-    </tr>
-    <tr>
-        <td>  B ~C ~D</td>
-        <td>4, 12</td>
-        <td>X</td>
-        <td>$</td>
-        <td>$</td>
-        <td>$</td>
-        <td>X</td>
-        <td>$</td>
-    </tr>
-    <tr>
-        <td>  A  C</td>
-        <td>10, 11, 14, 15</td>
-        <td>$</td>
-        <td>$</td>
-        <td>X</td>
-        <td>X</td>
-        <td>$</td>
-        <td>X</td>
-    </tr>
-    <tr>
-        <td>  A ~B</td>
-        <td>8, 9, 10, 11</td>
-        <td>$</td>
-        <td>X</td>
-        <td>X</td>
-        <td>X</td>
-        <td>$</td>
-        <td>$</td>
-    </tr>
-    <tr>
-        <td>  A ~D</td>
-        <td>8, 10, 12, 14</td>
-        <td>$</td>
-        <td>X</td>
-        <td>X</td>
-        <td>$</td>
-        <td>X</td>
-        <td>$</td>
-    </tr>
+<br/><table>
+	<tr>
+		<th colspan="8">Prime Implicant Table</th>
+	</tr>
+	<tr>
+		<th>Prime Implicants</th>
+		<th>Decimal minterms</th>
+		<th colspan="6">Given Minterms</th>
+	</tr>
+	<tr>
+		<th></th>
+		<th></th>
+		<th>4		</th>
+		<th>8		</th>
+		<th>10		</th>
+		<th>11		</th>
+		<th>12		</th>
+		<th>15		</th>
+	</tr>
+	<tr>
+		<td>  B ~C ~D</td>
+		<td>4, 12</td>
+		<td>X</td>
+		<td>$</td>
+		<td>$</td>
+		<td>$</td>
+		<td>X</td>
+		<td>$</td>
+	</tr>
+	<tr>
+		<td>  A  C</td>
+		<td>10, 11, 14, 15</td>
+		<td>$</td>
+		<td>$</td>
+		<td>X</td>
+		<td>X</td>
+		<td>$</td>
+		<td>X</td>
+	</tr>
+	<tr>
+		<td>  A ~B</td>
+		<td>8, 9, 10, 11</td>
+		<td>$</td>
+		<td>X</td>
+		<td>X</td>
+		<td>X</td>
+		<td>$</td>
+		<td>$</td>
+	</tr>
+	<tr>
+		<td>  A ~D</td>
+		<td>8, 10, 12, 14</td>
+		<td>$</td>
+		<td>X</td>
+		<td>X</td>
+		<td>$</td>
+		<td>X</td>
+		<td>$</td>
+	</tr>
 </table>
-
-<br />
-
-
-<table>
-    <tr>
-        <th colspan="1">Numbers with only 1 X</th>
-    </tr>
-    <tr>
-        <td>4</td>
-    </tr>
-    <tr>
-        <td>15</td>
-    </tr>
+<br/><table>
+	<tr>
+		<th colspan="1">Numbers with only 1 X</th>
+	</tr>
+	<tr>
+		<td>4</td>
+	</tr>
+	<tr>
+		<td>15</td>
+	</tr>
 </table>
-
-<br />
-
-
-<table>
-    <tr>
-        <th colspan="2">Essential Implicants</th>
-    </tr>
-    <tr>
-        <th>Decimal Minterm</th>
-        <th>Binary Representation</th>
-    </tr>
-    <tr>
-        <td>4, 12</td>
-        <td>  B ~C ~D</td>
-    </tr>
-    <tr>
-        <td>10, 11, 14, 15</td>
-        <td>  A  C</td>
-    </tr>
+<br/><table>
+	<tr>
+		<th colspan="2">Essential Implicants</th>
+	</tr>
+	<tr>
+		<th>Decimal Minterm</th>
+		<th>Binary Representation</th>
+	</tr>
+	<tr>
+		<td>4, 12</td>
+		<td>  B ~C ~D</td>
+	</tr>
+	<tr>
+		<td>10, 11, 14, 15</td>
+		<td>  A  C</td>
+	</tr>
 </table>
-
-
-
-
+<br/>
 </body>
 </html>
