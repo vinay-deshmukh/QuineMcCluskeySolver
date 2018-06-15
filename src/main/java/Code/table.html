@@ -50,11 +50,11 @@
             // 2 is row zero
 
             // get bold line between row zero and nRows start
-            var row0 = listOfTR[2].getElementsByTagName("td");
+            var row0 = listOfTR[2].getElementsByTagName("th");
             var nRow0 = listOfTR[3].getElementsByTagName("td");
             for(var ri=0; ri<row0.length; ri++){
-                row0[ri].style.borderBottomWidth = "0px";
-                nRow0[ri].style.borderTopWidth = sepBorderWidth;
+                row0[ri].style.borderBottomWidth = sepBorderWidth;
+                nRow0[ri].style.borderTopWidth = "0px";
             }
 
             for(var tri=3; tri < listOfTR.length - 1 ; tri++){
