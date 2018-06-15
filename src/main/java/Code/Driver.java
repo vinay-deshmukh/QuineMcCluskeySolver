@@ -65,14 +65,14 @@ public class Driver {
         listOfTablesToHTML.add(qm.getEssentialPrimeImplicantTable());
 
         // Print the final HTML file to actual .html files
+        HTMLTable htmlTable = new HTMLTable();
+        // Create object to initialize script and style tags from reference table.html file
+
         try {
             PrintStream outFile = new PrintStream(new File("target/outputTable.html"));
-
-            outFile.println(HTMLTable.getHTMLFile(listOfTablesToHTML));
+            outFile.println(htmlTable.getHTMLFile(listOfTablesToHTML));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
     }
 }
