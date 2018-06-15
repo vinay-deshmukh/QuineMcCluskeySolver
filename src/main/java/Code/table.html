@@ -26,7 +26,11 @@
     </style>
     <script  type="text/javascript">
     window.onload = function(){
-        var sepBorderWidth = "4px";
+        createThickGroupSeparatorLines();
+    }
+	
+	function createThickGroupSeparatorLines(){
+		var sepBorderWidth = "4px";
 
         var allTables = document.getElementsByTagName("table");
         for(var i=0; i < allTables.length; i++){
@@ -74,11 +78,9 @@
                     // rowN1[ci].style.borderTopColor = "";
                     rowN1[ci].style.borderTopWidth = "0px";
                 }
-
-
             }
         }
-    }
+	}
     </script>
 
 
