@@ -3,6 +3,9 @@ package Code;
 import Table.BaseTable;
 import Table.StepTable;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -35,19 +38,19 @@ public class Driver {
 
         System.out.println(qm.getEssentialPrimeImplicantTable());
 
-        System.out.println("\n\nHTML:\n\n");
-
-        for(StepTable s: qm.getListStepTables()){
-            System.out.println(s.toHTMLString());
-        }
-
-        System.out.println(qm.getUntickedTermsTable().toHTMLString());
-
-        System.out.println(qm.getPrimeImplicantTable().toHTMLString());
-
-        System.out.println(qm.getNumbersWithOneXTable().toHTMLString());
-
-        System.out.println(qm.getEssentialPrimeImplicantTable().toHTMLString());
+//        System.out.println("\n\nHTML:\n\n");
+//
+//        for(StepTable s: qm.getListStepTables()){
+//            System.out.println(s.toHTMLString());
+//        }
+//
+//        System.out.println(qm.getUntickedTermsTable().toHTMLString());
+//
+//        System.out.println(qm.getPrimeImplicantTable().toHTMLString());
+//
+//        System.out.println(qm.getNumbersWithOneXTable().toHTMLString());
+//
+//        System.out.println(qm.getEssentialPrimeImplicantTable().toHTMLString());
 
         System.out.println("============================");
         System.out.println("FULL HTML FILE:");
@@ -61,8 +64,14 @@ public class Driver {
         listOfTablesToHTML.add(qm.getNumbersWithOneXTable());
         listOfTablesToHTML.add(qm.getEssentialPrimeImplicantTable());
 
-        System.out.println(HTMLTable.getHTMLFile(listOfTablesToHTML));
+        // Print the final HTML file to actual .html files
+        try {
+            PrintStream outFile = new PrintStream(new File("target/outputTable.html"));
 
+            outFile.println(HTMLTable.getHTMLFile(listOfTablesToHTML));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
     }
