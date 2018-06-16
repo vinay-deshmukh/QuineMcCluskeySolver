@@ -18,6 +18,32 @@ public class BaseTable {
     // For eg, we need "A B C D" as a sub ColumnTitle under "BinaryRepresentation"
     // Initialized as null, since only some tables (StepTable) will use it, and others don't need it
 
+    public int getWideLengthGreaterThanPI_Table(){
+        // Call this method in HTMLTable
+        // This will return a blank string of
+        // length that is just more than the width
+        // of the PrimeImplicantTable
+        if(this instanceof PrimeImplicantTable){
+            String [] colTitles = this.getColumnTitles();
+            StringBuilder sb = new StringBuilder();
+
+            // Add "Prime Implicants"
+            sb.append(colTitles[0]);
+
+            // Add "Decimal Minterms"
+            sb.append(colTitles[1]);
+
+            // Add the minterms string
+            String [] row0 = this.getRowZero();
+            sb.append(row0[2]);
+
+            return sb.length();
+        }
+        else{
+            return 0;
+        }
+    }
+
     public BaseTable() {
     }
 

@@ -1,10 +1,12 @@
 package Code;
 
 import Table.BaseTable;
+import Table.PrimeImplicantTable;
 import org.jsoup.Jsoup;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class HTMLTable {
@@ -46,6 +48,24 @@ public class HTMLTable {
 
         // Begin Body
         sb.append("<body>\n");
+
+        // Get max width of PrimeImplicantTable
+        int maxWidth = 10;
+        for(BaseTable bt: listOfTablesToConvertToHTML){
+            if(bt instanceof PrimeImplicantTable){
+                maxWidth = bt.getWideLengthGreaterThanPI_Table();
+            }
+        }
+
+        // Add massive string here,
+        // Which is wider than PrimeImplicantTable
+        String nbsp = "F"; //using F since nbsp size is unreliable
+        sb.append("<div id=\"blankLine\">");
+            // create a string made up of n copies of string s
+            String result = String.join("", Collections.nCopies((int)(maxWidth*1.40), nbsp));
+            sb.append(result);
+        sb.append("</div>\n");
+
 
         // Insert all tables here
         for (BaseTable bt : listOfTablesToConvertToHTML) {

@@ -23,10 +23,16 @@
             padding: 0px 10px 0px 10px;
             /* top right bottom left */
         }
+		#blankLine{
+			color: rgba(10, 10, 10, 0);
+			/* Alpha is set to 0, so this text
+			doesn't show up in */
+		}
     </style>
     <script  type="text/javascript">
     window.onload = function(){
         createThickGroupSeparatorLines();
+		createBlankLine();
     }
 	
 	function createThickGroupSeparatorLines(){
@@ -81,12 +87,13 @@
             }
         }
 	}
-    </script>
+	</script>
 
 
 
 </head>
 <body>
+	<div>F&nbsp;F</div>
 <table>
     <tr>
         <th colspan="3" style="border: 10px solid red">
