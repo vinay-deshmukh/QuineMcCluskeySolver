@@ -282,7 +282,7 @@ public class QuineMcCluskey {
 
         // Create the StepTable(s) from Step(s)
         for (int stepNumber = 0; stepNumber < stepList.size(); stepNumber++) {
-            if(!stepList.isEmpty())
+            if(!stepList.get(stepNumber).IsStepEmpty())
                 stepList.get(stepNumber).createStepTableFromStep(listStepTables, "Step " + stepNumber);
         }
 
