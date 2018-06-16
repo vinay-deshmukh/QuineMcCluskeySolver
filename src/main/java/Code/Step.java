@@ -7,8 +7,8 @@ import java.util.*;
 public class Step implements Cloneable {
     public static final int NONE = -99;
     public static final int DASH = -99;
-    public static final String TICK = "T";
-    public static final String NO_TICK = "N";
+    public static final String TICK = "✔";
+    public static final String NO_TICK = " ";
     static Set<Set<Integer>> untickedTerms = new HashSet<>();
     static HashMap<Set<Integer>, List<Integer>> primeImplicantHashMap = new HashMap<>();
     ArrayList<GroupSubEntries>[] groupArray;
