@@ -14,7 +14,7 @@ public class HTMLTable {
     private String tagStyle;
     private String tagScript;
 
-    HTMLTable(){
+    public HTMLTable(){
 
         try {
             tagStyle  = Jsoup.parse(
