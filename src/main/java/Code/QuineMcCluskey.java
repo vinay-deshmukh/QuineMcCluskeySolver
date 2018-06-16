@@ -9,6 +9,11 @@ public class QuineMcCluskey {
     // CONSTANT fields to decide what kind of string input.
     private final static int NUMS = 3;
     private final static int DONT = 4;
+
+    // Constant for X and " " (blank) in PrimeImplicantTable
+    public final static String X_PI = "X";
+    public final static String BLANK = "$";
+
     private List<StepTable> listStepTables = new ArrayList<>();
     private PrimeImplicantTable primeImplicantTable = new PrimeImplicantTable();
     private NumbersWithOneXTable numbersWithOneXTable = new NumbersWithOneXTable();
@@ -111,10 +116,10 @@ public class QuineMcCluskey {
                 Xformat += " ";
                 Integer prevNoOfX = PI_Table.noOfXHashMap.get(numbers[i]);
                 if (s.contains(numbers[i])) {
-                    Xformat += String.format(formatForOneChar, "X");
+                    Xformat += String.format(formatForOneChar, X_PI);
                     PI_Table.noOfXHashMap.put(numbers[i], new Integer(prevNoOfX + 1));
                 } else {
-                    Xformat += String.format(formatForOneChar, "$");
+                    Xformat += String.format(formatForOneChar, BLANK);
                     // Using $ instead of " " since parsing a blank space is not possible
                     // A special TableLayout is needed for PrimeImplicantTable as
                     // it has another table strucutre for it's X values

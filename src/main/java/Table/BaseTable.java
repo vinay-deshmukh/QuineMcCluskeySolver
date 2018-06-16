@@ -1,5 +1,7 @@
 package Table;
 
+import Code.QuineMcCluskey;
+
 public class BaseTable {
 
     private String header = null;
@@ -165,12 +167,24 @@ public class BaseTable {
 
                     // We convert it to charArray after replacing each " " with a "",
                     // split didn't work as intended when there are multiple spaces present
-                    char[] cArray = sArray[sArray.length - 1].replaceAll(" ", "").toCharArray();
-                    for(char n: cArray){
+//                    char[] cArray = sArray[sArray.length - 1].replaceAll(" ", "").toCharArray();
+//                    for(char n: cArray){
+//                        sb.append("\t\t<td>");
+//                            sb.append(String.format("%c", n));
+//                        sb.append("</td>\n");
+//                    }
+                    String [] sX = sArray[sArray.length - 1].trim().split("\\s+");
+                    for(String s: sX){
                         sb.append("\t\t<td>");
-                            sb.append(String.format("%c", n));
+                        if(s.equals(QuineMcCluskey.X_PI))
+                            // If it's X, add it as it is
+                            sb.append(String.format("%s", s));
+                        else
+                            // If it's BLANK, add &nbsp;
+                            sb.append(String.format("%s", "&nbsp;"));
                         sb.append("</td>\n");
                     }
+
 
                 }
                 else{
