@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Step implements Cloneable {
     public static final int NONE = -99;
-    public static final int DASH = -99;
+    public static final int DASH = -98;
     public static final String TICK = "✔";
     public static final String NO_TICK = " ";
     static Set<Set<Integer>> untickedTerms = new HashSet<>();
