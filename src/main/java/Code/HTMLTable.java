@@ -6,6 +6,8 @@ import org.jsoup.Jsoup;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,13 +17,15 @@ public class HTMLTable {
     private String tagScript;
 
     public HTMLTable(){
-
+        
         try {
+            InputStream resource = getClass().getResourceAsStream("/table.html");
             tagStyle  = Jsoup.parse(
-                                new File("src/main/java/Code/table.html"), null)
+                                resource, null, "")
                                 .select("head style").outerHtml();
+            resource = getClass().getResourceAsStream("/table.html");
             tagScript = Jsoup.parse(
-                                new File("src/main/java/Code/table.html"), null)
+                                resource, null, "")
                                 .select("head script").outerHtml();
         } catch (IOException e) {
             e.printStackTrace();
